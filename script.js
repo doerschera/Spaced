@@ -26,5 +26,25 @@ $(document).ready(function() {
       // The start method will wait until the DOM is loaded.
       ui.start('#firebaseAuth', uiConfig);
 
-  
+  // sign in button
+  $('#signIn').click(function() {
+    $('#firebaseAuth').removeClass('disable');
+
+    // firebase sign in auth
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function() {
+      // error handling
+      console.log(error);
+    })
+
+    firebase.auth().onAuthStateChange(function(user) {
+      if(user) {
+        var name = user.displayName;
+        var email = user.email;
+        var uid = user.uid;
+      }
+    })
+  })
+
+
+
 })
