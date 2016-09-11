@@ -13,7 +13,7 @@ $(document).ready(function() {
   // Firebase auth UI
 
   var uiConfig = {
-        'signInSuccessUrl': 'index.html',
+        'signInSuccessUrl': 'main.html',
         'signInOptions': [
           firebase.auth.EmailAuthProvider.PROVIDER_ID
         ],
@@ -21,28 +21,23 @@ $(document).ready(function() {
         // 'tosUrl': '<your-tos-url>',
       };
 
-      // Initialize the FirebaseUI Widget using Firebase.
-      var ui = new firebaseui.auth.AuthUI(firebase.auth());
-      // The start method will wait until the DOM is loaded.
-      ui.start('#firebaseAuth', uiConfig);
+  // Initialize the FirebaseUI Widget using Firebase.
+  var ui = new firebaseui.auth.AuthUI(firebase.auth());
+  // The start method will wait until the DOM is loaded.
+  ui.start('#firebaseAuth', uiConfig);
 
-  // sign in button
-  $('#signIn').click(function() {
-    $('#firebaseAuth').removeClass('disable');
+  // firebase sign in auth
+  firebase.auth().signInWithEmailAndPassword(email, password).catch(function() {
+    // error handling
+    console.log(error);
+  })
 
-    // firebase sign in auth
-    firebase.auth().signInWithEmailAndPassword(email, password).catch(function() {
-      // error handling
-      console.log(error);
-    })
-
-    firebase.auth().onAuthStateChange(function(user) {
-      if(user) {
-        var name = user.displayName;
-        var email = user.email;
-        var uid = user.uid;
-      }
-    })
+  firebase.auth().onAuthStateChange(function(user) {
+    if(user) {
+      var name = user.displayName;
+      var email = user.email;
+      var uid = user.uid;
+    }
   })
 
 
