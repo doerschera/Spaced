@@ -1,5 +1,10 @@
 $(document).ready(function() {
 
+  // variables
+  var name;
+  var email;
+  var uid;
+
   // Firebase initialization
 
   var config = {
@@ -34,9 +39,9 @@ $(document).ready(function() {
 
   firebase.auth().onAuthStateChange(function(user) {
     if(user) {
-      var name = user.displayName;
-      var email = user.email;
-      var uid = user.uid;
+      name = user.displayName;
+      email = user.email;
+      uid = user.uid;
     }
   })
 
