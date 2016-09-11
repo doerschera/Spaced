@@ -13,7 +13,7 @@ $(document).ready(function() {
   // Firebase auth UI
 
   var uiConfig = {
-        'signInSuccessUrl': '<url-to-redirect-to-on-success>',
+        'signInSuccessUrl': 'index.html',
         'signInOptions': [
           firebase.auth.EmailAuthProvider.PROVIDER_ID
         ],
