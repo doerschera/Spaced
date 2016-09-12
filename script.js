@@ -1,10 +1,7 @@
 $(document).ready(function() {
 
   // firebase variables
-  var name;
-  var email;
-  var uid;
-  var signedIn = false;
+  var currentUser = {};
 
   // Firebase initialization
 
@@ -149,12 +146,12 @@ $(document).ready(function() {
       // [END_EXCLUDE]
       if (user) {
         // User is signed in.
-        displayName = user.displayName;
-        email = user.email;
+        var displayName = user.displayName;
+        var email = user.email;
         var emailVerified = user.emailVerified;
         var photoURL = user.photoURL;
         var isAnonymous = user.isAnonymous;
-        uid = user.uid;
+        var uid = user.uid;
         var providerData = user.providerData;
         // [START_EXCLUDE silent]
         document.getElementById('quickstart-sign-in-status').textContent = 'Signed in';
@@ -184,10 +181,14 @@ $(document).ready(function() {
   }
   window.onload = function() {
     initApp();
+    currentUser = user;
   };
 
   // app logic
-
+  var name = currentUser.name;
+  var email = currentUser.email;
+  var uid = currentUser.uid;
+  console.log(uid);
   var front;
   var back;
   var cardCounter = 0;
