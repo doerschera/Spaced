@@ -19,7 +19,7 @@ $(document).ready(function() {
   // Firebase auth UI
 
   var uiConfig = {
-        'signInSuccessUrl': 'index.html',
+        'signInSuccessUrl': 'main.html',
         'signInOptions': [
           firebase.auth.EmailAuthProvider.PROVIDER_ID
         ],
