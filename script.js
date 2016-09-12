@@ -181,17 +181,24 @@ $(document).ready(function() {
   }
   window.onload = function() {
     initApp();
-    currentUser = user;
   };
 
   // app logic
-  var name = currentUser.name;
-  var email = currentUser.email;
-  var uid = currentUser.uid;
-  console.log(uid);
+  var name;
+  var email;
+  var uid;
   var front;
   var back;
   var cardCounter = 0;
+
+  firebase.auth().onAuthStateChanged(function(user) {
+    if(user) {
+      var ref = firebase.auth().currentUser;
+      uid = ref.uid;
+      email = ref.email;
+      name = ref.name;
+    }
+  })
 
   // new card constructor
   function Card (front, back) {
@@ -202,7 +209,6 @@ $(document).ready(function() {
 
   // create new card
   $('#newCard').click(function() {
-    console.log(uid);
     writeCard();
   })
 
@@ -210,7 +216,6 @@ $(document).ready(function() {
     front = $('#front').val().trim();
     back = $('#back').val().trim();
     var card = new Card(front, back);
-    console.log(card);
 
     var cards = [];
     cards[cardCounter] = card;
@@ -218,6 +223,8 @@ $(document).ready(function() {
     firebase.database().ref('/users/'+uid).set({
       cards
     });
+
+    cardCounter ++;
   }
 
 
