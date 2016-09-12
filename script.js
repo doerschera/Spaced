@@ -4,6 +4,7 @@ $(document).ready(function() {
   var name;
   var email;
   var uid;
+  var signedIn = false;
 
   // Firebase initialization
 
@@ -18,7 +19,7 @@ $(document).ready(function() {
   // Firebase auth UI
 
   var uiConfig = {
-        'signInSuccessUrl': 'main.html',
+        'signInSuccessUrl': 'index.html',
         'signInOptions': [
           firebase.auth.EmailAuthProvider.PROVIDER_ID
         ],
@@ -42,7 +43,28 @@ $(document).ready(function() {
       name = user.displayName;
       email = user.email;
       uid = user.uid;
+      signedIn = true;
     }
+  })
+
+  if(signedIn) {
+    $('#firebaseAuth').addClass('disable');
+    $('#input').removeClass('disable');
+  }
+
+  var front = $('#front').val().trim();
+  var back = $('#back').val().trim();
+  var cardCounter = 0;
+
+  function Card (front, back) {
+    this.front = front;
+    this.back = back;
+    this.level = 1;
+  }
+
+  $('#newCard').click(function() {
+    var card = new Card(font, back);
+    console.log(card);
   })
 
 
