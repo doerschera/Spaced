@@ -194,6 +194,7 @@ $(document).ready(function() {
   var cardIndex = 0;
   var length;
   var cardOrder = [];
+  var nextCard = cardOrder[cardIndex];
 
 
 
@@ -280,8 +281,9 @@ $(document).ready(function() {
   }
 
   function getCard() {
+    var nextCard = cardOrder[cardIndex];
     var cardsRef = firebase.database().ref('/users/'+uid+'/'+deckName+'/cards');
-    cardsRef.child(cardIndex).once('value').then(function(snapshot) {
+    cardsRef.child(nextCard).once('value').then(function(snapshot) {
       var cardFront = snapshot.child('front').val();
       console.log(cardFront);
       var newHeading = $('<h2>');
@@ -291,19 +293,21 @@ $(document).ready(function() {
   }
 
   function checkAnswer() {
+    var nextCard = cardOrder[cardIndex];
     var answer = $('#answer').val().trim();
     var cardsRef = firebase.database().ref('/users/'+uid+'/'+deckName+'/cards');
-    cardsRef.child(cardIndex).once('value').then(function(snapshot) {
+    cardsRef.child(nextCard).once('value').then(function(snapshot) {
       var correct = snapshot.child('back').val();
       var level = snapshot.child('level').val();
       if(answer == correct) {
         console.log('correct');
         level ++
-        cardsRef.child(cardIndex).child('level').set(level)
+        cardsRef.child(nextCard).child('level').set(level)
         console.log(level);
       } else {
         console.log('incorrect');
-        cardsRef.child(cardIndex).child('level').set(1);
+        cardsRef.child(nextCard).child('level').set(1);
+        $('#cardFront > h2').html('The correct answer is: '+correct);
       }
     })
   }
