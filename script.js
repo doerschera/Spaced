@@ -190,6 +190,7 @@ $(document).ready(function() {
   var front;
   var back;
   var cardCounter = 0;
+  var newDeckName;
   var deckName;
   var cardIndex = 0;
   var length;
@@ -211,6 +212,7 @@ $(document).ready(function() {
     this.front = front;
     this.back = back;
     this.level = 1;
+    this.time = "no time";
   }
 
   // create new deck
@@ -225,17 +227,21 @@ $(document).ready(function() {
 
   // select deck
   $('.deck').on('click', function() {
+    $('.deck').off('click');
     deckName = $(this).html().trim();
     console.log(deckName);
-    var cardsRef = firebase.database().ref('/users/'+uid+'/'+deckName+'/cards');
-    cardsRef.once('value').then(function(snapshot) {
-      length = snapshot.val().length;
-    })
   })
+
 
   // select card
   $('#start').click(function() {
     $('#new').addClass('disable');
+    console.log(deckName);
+    var cardsRef = firebase.database().ref('/users/'+uid+'/'+deckName+'/cards');
+    cardsRef.once('value').then(function(snapshot) {
+      length = snapshot.val().length;
+      console.log(length);
+    })
     cardRandom();
     getCard();
     console.log(cardOrder);
@@ -247,6 +253,7 @@ $(document).ready(function() {
 
   function newDeck() {
     deckName = $('#deckName').val().trim();
+    console.log(deckName);
     var decks = {};
     decks[deckName] = {
       cards: ['']
@@ -266,6 +273,14 @@ $(document).ready(function() {
     cardCounter ++;
   }
 
+  function deckLength() {
+    var cardsRef = firebase.database().ref('/users/'+uid+'/'+deckName+'/cards');
+    cardsRef.once('value').then(function(snapshot) {
+      length = snapshot.val().length;
+      console.log(length);
+    })
+  }
+
   function cardRandom() {
     length = parseInt(length);
     for(var i = 0; i < length; i++) {
@@ -281,9 +296,12 @@ $(document).ready(function() {
   }
 
   function getCard() {
+    var time = moment().format('MMMM Do YYYY');
     var nextCard = cardOrder[cardIndex];
     var cardsRef = firebase.database().ref('/users/'+uid+'/'+deckName+'/cards');
+
     cardsRef.child(nextCard).once('value').then(function(snapshot) {
+      // cardsRef.child(nextCard).child('time').set(time);
       var cardFront = snapshot.child('front').val();
       console.log(cardFront);
       var newHeading = $('<h2>');
@@ -301,8 +319,10 @@ $(document).ready(function() {
       var level = snapshot.child('level').val();
       if(answer == correct) {
         console.log('correct');
-        level ++
-        cardsRef.child(nextCard).child('level').set(level)
+        if(level < 7) {
+          level ++
+        }
+        cardsRef.child(nextCard).child('level').set(level);
         console.log(level);
       } else {
         console.log('incorrect');
