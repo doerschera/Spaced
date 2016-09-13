@@ -190,6 +190,7 @@ $(document).ready(function() {
   var front;
   var back;
   var cardCounter = 0;
+  var deckName;
 
   firebase.auth().onAuthStateChanged(function(user) {
     if(user) {
@@ -207,10 +208,25 @@ $(document).ready(function() {
     this.level = 1;
   }
 
+  // create new deck
+  $('#newDeck').click(function() {
+    newDeck();
+  })
+
   // create new card
   $('#newCard').click(function() {
     writeCard();
   })
+
+  function newDeck() {
+    deckName = $('#deckName').val().trim();
+    var decks = {};
+    decks[deckName] = {
+      here: 'I made it'
+    };
+    console.log(decks);
+    firebase.database().ref('/users/'+uid).update(decks);
+  }
 
   function writeCard() {
     front = $('#front').val().trim();
@@ -220,7 +236,9 @@ $(document).ready(function() {
     var cards = [];
     cards[cardCounter] = card;
 
-    firebase.database().ref('/users/'+uid).set({
+    console.log(deckName);
+
+    firebase.database().ref('/users/'+uid).child(deckName).set({
       cards
     });
 
