@@ -200,7 +200,6 @@ $(document).ready(function() {
       name = ref.name;
     }
   })
-
   // new card constructor
   function Card (front, back) {
     this.front = front;
@@ -222,7 +221,7 @@ $(document).ready(function() {
     deckName = $('#deckName').val().trim();
     var decks = {};
     decks[deckName] = {
-      here: 'I made it'
+      cards: ['']
     };
     console.log(decks);
     firebase.database().ref('/users/'+uid).update(decks);
@@ -233,14 +232,12 @@ $(document).ready(function() {
     back = $('#back').val().trim();
     var card = new Card(front, back);
 
-    var cards = [];
-    cards[cardCounter] = card;
+    // var cards = [];
+    // cards[cardCounter] = card;
 
     console.log(deckName);
 
-    firebase.database().ref('/users/'+uid).child(deckName).set({
-      cards
-    });
+    firebase.database().ref('/users/'+uid+'/'+deckName+'/cards'+ '/'+cardCounter).set(card);
 
     cardCounter ++;
   }
