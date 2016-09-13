@@ -191,6 +191,8 @@ $(document).ready(function() {
   var back;
   var cardCounter = 0;
   var deckName;
+  var cardIndex;
+  var length;
 
   firebase.auth().onAuthStateChanged(function(user) {
     if(user) {
@@ -217,6 +219,20 @@ $(document).ready(function() {
     writeCard();
   })
 
+  // select deck
+  $('.deck').on('click', function() {
+    deckName = $(this).html().trim();
+    console.log(deckName);
+    firebase.database().ref('/users/'+uid+'/'+deckName+'/cards').on('value', function(snapshot) {
+      length = snapshot.val().length;
+    })
+  })
+
+  $('#start').click(function() {
+    $('#new').addClass('disable');
+    getCard();
+  })
+
   function newDeck() {
     deckName = $('#deckName').val().trim();
     var decks = {};
@@ -231,15 +247,15 @@ $(document).ready(function() {
     front = $('#front').val().trim();
     back = $('#back').val().trim();
     var card = new Card(front, back);
+    var ref = '/users/'+uid+'/'+deckName+'/cards'+ '/'+cardCounter;
 
-    // var cards = [];
-    // cards[cardCounter] = card;
-
-    console.log(deckName);
-
-    firebase.database().ref('/users/'+uid+'/'+deckName+'/cards'+ '/'+cardCounter).set(card);
+    firebase.database().ref(ref).set(card);
 
     cardCounter ++;
+  }
+
+  function getCard() {
+    // math random function
   }
 
 
