@@ -193,6 +193,7 @@ $(document).ready(function() {
   var deckName;
   var cardIndex;
   var length;
+  var cardOrder = [];
 
   firebase.auth().onAuthStateChanged(function(user) {
     if(user) {
@@ -223,7 +224,8 @@ $(document).ready(function() {
   $('.deck').on('click', function() {
     deckName = $(this).html().trim();
     console.log(deckName);
-    firebase.database().ref('/users/'+uid+'/'+deckName+'/cards').on('value', function(snapshot) {
+    var cardsRef = firebase.database().ref('/users/'+uid+'/'+deckName+'/cards');
+    cardsRef.once('value').then(function(snapshot) {
       length = snapshot.val().length;
     })
   })
@@ -231,6 +233,7 @@ $(document).ready(function() {
   $('#start').click(function() {
     $('#new').addClass('disable');
     getCard();
+    console.log(cardOrder);
   })
 
   function newDeck() {
@@ -255,7 +258,17 @@ $(document).ready(function() {
   }
 
   function getCard() {
-    // math random function
+    length = parseInt(length);
+    for(var i = 0; i < length; i++) {
+      var num = Math.floor(Math.random()*length);
+      if(cardOrder.length == length) {
+        return false;
+      } else if(cardOrder.indexOf(num) == -1) {
+        cardOrder.push(num);
+      } else {
+        getCard();
+      }
+    }
   }
 
 
