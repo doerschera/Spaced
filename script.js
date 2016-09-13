@@ -191,9 +191,11 @@ $(document).ready(function() {
   var back;
   var cardCounter = 0;
   var deckName;
-  var cardIndex;
+  var cardIndex = 0;
   var length;
   var cardOrder = [];
+
+
 
   firebase.auth().onAuthStateChanged(function(user) {
     if(user) {
@@ -230,10 +232,16 @@ $(document).ready(function() {
     })
   })
 
+  // select card
   $('#start').click(function() {
     $('#new').addClass('disable');
+    cardRandom();
     getCard();
     console.log(cardOrder);
+  })
+
+  $('#submit').click(function() {
+    checkAnswer();
   })
 
   function newDeck() {
@@ -257,7 +265,7 @@ $(document).ready(function() {
     cardCounter ++;
   }
 
-  function getCard() {
+  function cardRandom() {
     length = parseInt(length);
     for(var i = 0; i < length; i++) {
       var num = Math.floor(Math.random()*length);
@@ -266,11 +274,39 @@ $(document).ready(function() {
       } else if(cardOrder.indexOf(num) == -1) {
         cardOrder.push(num);
       } else {
-        getCard();
+        cardRandom();
       }
     }
   }
 
+  function getCard() {
+    var cardsRef = firebase.database().ref('/users/'+uid+'/'+deckName+'/cards');
+    cardsRef.child(cardIndex).once('value').then(function(snapshot) {
+      var cardFront = snapshot.child('front').val();
+      console.log(cardFront);
+      var newHeading = $('<h2>');
+      newHeading = newHeading.html(cardFront);
+      $('#cardFront').append(newHeading);
+    })
+  }
+
+  function checkAnswer() {
+    var answer = $('#answer').val().trim();
+    var cardsRef = firebase.database().ref('/users/'+uid+'/'+deckName+'/cards');
+    cardsRef.child(cardIndex).once('value').then(function(snapshot) {
+      var correct = snapshot.child('back').val();
+      var level = snapshot.child('level').val();
+      if(answer == correct) {
+        console.log('correct');
+        level ++
+        cardsRef.child(cardIndex).child('level').set(level)
+        console.log(level);
+      } else {
+        console.log('incorrect');
+        cardsRef.child(cardIndex).child('level').set(1);
+      }
+    })
+  }
 
 
 })
