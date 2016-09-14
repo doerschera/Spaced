@@ -16,7 +16,7 @@ $(document).ready(function() {
   // Firebase auth UI
 
   var uiConfig = {
-        'signInSuccessUrl': 'main.html',
+        'signInSuccessUrl': 'index.html',
         'signInOptions': [
           firebase.auth.EmailAuthProvider.PROVIDER_ID
         ],
@@ -208,6 +208,9 @@ $(document).ready(function() {
       uid = ref.uid;
       email = ref.email;
       name = ref.name;
+
+      $('#new').removeClass('disable');
+      $('#firebaseAuth').addClass('disable');
     }
   })
   // new card constructor
@@ -222,12 +225,9 @@ $(document).ready(function() {
 
   // sign in scroll
   $(window).scroll(function() {
-    if(signIn == true) {
-      $('.welcome').animate({top: '-1000px', opacity: '0'}, 1000*2)
-        .addClass('disable');
-      $('#firebaseAuth').removeClass('disable').animate({top: '30vh'}, 1000*2);
-      signIn = false;
-    }
+    $('.welcome').animate({top: '-1000px', opacity: '0'}, 1000*2)
+      .addClass('disable');
+    $('#firebaseAuth').removeClass('disable').animate({top: '30vh'}, 1000*2);
   })
 
   // create new deck
