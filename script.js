@@ -185,6 +185,7 @@ $(document).ready(function() {
   };
 
   // app logic
+  var signIn = true;
   var name;
   var email;
   var uid;
@@ -194,8 +195,10 @@ $(document).ready(function() {
   var deckName;
   var cardIndex = 0;
   var length;
+  var cardsToDo = [];
   var cardOrder = [];
   var nextCard = cardOrder[cardIndex];
+  var level = 1;
 
 
 
@@ -219,10 +222,12 @@ $(document).ready(function() {
 
   // sign in scroll
   $(window).scroll(function() {
-   $('.welcome').animate({top: '-1000px', opacity: '0'}, 1000*2)
-     .addClass('disable');
-   $('#firebaseAuth').removeClass('disable').animate({top: '30vh'}, 1000*2);
-
+    if(signIn == true) {
+      $('.welcome').animate({top: '-1000px', opacity: '0'}, 1000*2)
+        .addClass('disable');
+      $('#firebaseAuth').removeClass('disable').animate({top: '30vh'}, 1000*2);
+      signIn = false;
+    }
   })
 
   // create new deck
@@ -245,14 +250,18 @@ $(document).ready(function() {
   // select card
   $('#start').click(function() {
     $('#new').addClass('disable');
-    console.log(cardOrder);
+    firebase.database().ref('users/'+uid).update({
+      time: 'null'
+    })
     console.log(deckName);
     var cardsRef = firebase.database().ref('/users/'+uid+'/'+deckName+'/cards');
-    cardsRef.once('value').then(function(snapshot) {      length = snapshot.val().length;
-    console.log(length);
-    cardRandom();
-    getCard();
-     })
+    cardsRef.once('value').then(function(snapshot) {
+      length = snapshot.val().length;
+      console.log(length);
+      setTime();
+      cardRandom();
+      getCard();
+    })
   })
 
   $('#submit').click(function() {
@@ -280,26 +289,44 @@ $(document).ready(function() {
     cardCounter ++;
   }
 
+  function deckLength() {
+    var cardsRef = firebase.database().ref('/users/'+uid+'/'+deckName+'/cards');
+    cardsRef.once('value').then(function(snapshot) {
+      length = snapshot.val().length;
+      console.log(length);
+    })
+    setTime();
+    cardRandom();
+    getCard();
+  }
+
   function cardRandom() {
-    length = parseInt(length);
-    for(var i = 0; i < length; i++) {
-      var num = Math.floor(Math.random()*length);
-      if(cardOrder.length == length) {
+    determineLevels();
+    for(var i = 0; i < cardsToDo.length; i++) {
+      var num = Math.floor(Math.random()*cardsToDo.length);
+      if(cardOrder.length == cardsToDo.length) {
         return false;
       } else if(cardOrder.indexOf(num) == -1) {
-        cardOrder.push(num);
+        console.log('here');
+        cardOrder.push(cardsToDo[num]);
+        console.log('card order:'+cardOrder);
       } else {
         cardRandom();
       }
     }
   }
 
+  function setTime() {
+    var newView = moment().format();
+    firebase.database().ref('users/' + uid).update({time: newView});
+  }
+
   function getCard() {
-    var time = moment().format('MMMM Do YYYY');
     var nextCard = cardOrder[cardIndex];
-    var cardsRef = firebase.database().ref('/users/'+uid+'/'+deckName+'/cards');
+    console.log('next card:'+ nextCard);
+    var cardsRef = firebase.database().ref('users/'+uid+'/'+deckName+'/cards');
+
     cardsRef.child(nextCard).once('value').then(function(snapshot) {
-      // cardsRef.child(nextCard).child('time').set(time);
       var cardFront = snapshot.child('front').val();
       console.log(cardFront);
       var newHeading = $('<h2>');
@@ -330,5 +357,52 @@ $(document).ready(function() {
     })
   }
 
+  function determineLevels() {
+    length = parseInt(length);
+    var cardRef = firebase.database().ref('/users/'+uid+'/'+deckName+'/cards');
+    var timeRef = firebase.database().ref('/users/'+uid);
+
+    timeRef.once('value').then(function(snapshot) {
+      var lastView = snapshot.child('time').val();
+      console.log(lastView);
+      var now = moment();
+      var diff = now.diff(lastView, 'hours');
+      console.log('diff' +diff);
+
+      if(diff <= 3) {
+        level = 2;
+        console.log('level: '+level);
+      } else if (diff <= 24) {
+        level = 3;
+        console.log('level: '+level);
+      } else if(diff <= 36) {
+        level = 4;
+        console.log('level: '+level);
+      } else if(diff <= 168) {
+        level = 5;
+        console.log('level: '+level);
+      } else if(diff <= 720) {
+        level = 6;
+        console.log('level: '+level);
+      } else if (diff <= 2160) {
+        level = 7;
+        console.log('level: '+level);
+      }
+
+      cardRef.once('value').then(function(snapshot) {
+        console.log(level);
+        for(var i = 0; i < length; i++) {
+          var cardLevel = snapshot.child(i).child('level').val();
+
+          if(cardLevel <= level) {
+            cardsToDo.push(i);
+            console.log(cardsToDo);
+          }
+        }
+      })
+    })
+
+
+  }
 
 })
