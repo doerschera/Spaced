@@ -259,8 +259,7 @@ $(document).ready(function() {
       length = snapshot.val().length;
       console.log(length);
       setTime();
-      cardRandom();
-      getCard();
+      determineLevels();
     })
   })
 
@@ -295,15 +294,13 @@ $(document).ready(function() {
       length = snapshot.val().length;
       console.log(length);
     })
-    setTime();
-    cardRandom();
-    getCard();
   }
 
   function cardRandom() {
-    determineLevels();
-    for(var i = 0; i < cardsToDo.length; i++) {
-      var num = Math.floor(Math.random()*cardsToDo.length);
+    var cardsLength = cardsToDo.length;
+    console.log(cardsLength);
+    for(var i = 0; i < cardsLength; i++) {
+      var num = Math.floor(Math.random()*cardsLength);
       if(cardOrder.length == cardsToDo.length) {
         return false;
       } else if(cardOrder.indexOf(num) == -1) {
@@ -399,6 +396,8 @@ $(document).ready(function() {
             console.log(cardsToDo);
           }
         }
+        cardRandom();
+        getCard();
       })
     })
 
