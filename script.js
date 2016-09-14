@@ -181,6 +181,7 @@ $(document).ready(function() {
   }
   window.onload = function() {
     initApp();
+    $('#firebaseAuth').addClass('disable');
   };
 
   // app logic
@@ -212,6 +213,17 @@ $(document).ready(function() {
     this.back = back;
     this.level = 1;
   }
+
+  $('.welcome').fadeIn(1000*3);
+  $('#firebaseAuth').addClass('disable');
+
+  // sign in scroll
+  $(window).scroll(function() {
+   $('.welcome').animate({top: '-1000px', opacity: '0'}, 1000*2)
+     .addClass('disable');
+   $('#firebaseAuth').removeClass('disable').animate({top: '30vh'}, 1000*2);
+
+  })
 
   // create new deck
   $('#newDeck').click(function() {
