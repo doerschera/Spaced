@@ -190,7 +190,6 @@ $(document).ready(function() {
   var front;
   var back;
   var cardCounter = 0;
-  var newDeckName;
   var deckName;
   var cardIndex = 0;
   var length;
@@ -212,19 +211,7 @@ $(document).ready(function() {
     this.front = front;
     this.back = back;
     this.level = 1;
-    this.time = "no time";
   }
-
-  $('.welcome').fadeIn(1000*3);
-  $('#firebaseAuth').addClass('disable');
-
-  // sign in scroll
-  $(window).scroll(function() {
-    $('.welcome').animate({top: '-1000px', opacity: '0'}, 1000*2)
-      .addClass('disable');
-    $('#firebaseAuth').removeClass('disable').animate({top: '30vh'}, 1000*2);
-
-  })
 
   // create new deck
   $('#newDeck').click(function() {
@@ -238,24 +225,22 @@ $(document).ready(function() {
 
   // select deck
   $('.deck').on('click', function() {
-    $('.deck').off('click');
     deckName = $(this).html().trim();
     console.log(deckName);
+    $('.deck').off('click');
   })
-
 
   // select card
   $('#start').click(function() {
     $('#new').addClass('disable');
+    console.log(cardOrder);
     console.log(deckName);
     var cardsRef = firebase.database().ref('/users/'+uid+'/'+deckName+'/cards');
-    cardsRef.once('value').then(function(snapshot) {
-      length = snapshot.val().length;
-      console.log(length);
-    })
+    cardsRef.once('value').then(function(snapshot) {      length = snapshot.val().length;
+    console.log(length);
     cardRandom();
     getCard();
-    console.log(cardOrder);
+     })
   })
 
   $('#submit').click(function() {
@@ -264,7 +249,6 @@ $(document).ready(function() {
 
   function newDeck() {
     deckName = $('#deckName').val().trim();
-    console.log(deckName);
     var decks = {};
     decks[deckName] = {
       cards: ['']
@@ -282,14 +266,6 @@ $(document).ready(function() {
     firebase.database().ref(ref).set(card);
 
     cardCounter ++;
-  }
-
-  function deckLength() {
-    var cardsRef = firebase.database().ref('/users/'+uid+'/'+deckName+'/cards');
-    cardsRef.once('value').then(function(snapshot) {
-      length = snapshot.val().length;
-      console.log(length);
-    })
   }
 
   function cardRandom() {
@@ -310,7 +286,6 @@ $(document).ready(function() {
     var time = moment().format('MMMM Do YYYY');
     var nextCard = cardOrder[cardIndex];
     var cardsRef = firebase.database().ref('/users/'+uid+'/'+deckName+'/cards');
-
     cardsRef.child(nextCard).once('value').then(function(snapshot) {
       // cardsRef.child(nextCard).child('time').set(time);
       var cardFront = snapshot.child('front').val();
@@ -331,9 +306,9 @@ $(document).ready(function() {
       if(answer == correct) {
         console.log('correct');
         if(level < 7) {
-          level ++
+		        level ++
         }
-        cardsRef.child(nextCard).child('level').set(level);
+        cardsRef.child(nextCard).child('level').set(level)
         console.log(level);
       } else {
         console.log('incorrect');

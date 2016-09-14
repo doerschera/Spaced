@@ -25,13 +25,13 @@ h1 {
 
 .welcome {
   display: none;
-  margin-top: 10vh;
+  margin-top: 20vh;
 }
 
 .arrow {
   text-align: center;
   margin-top: 0;
-  margin-bottom: 20vh;
+  margin-bottom: 30vh;
 }
 
 #arrowDown {
