@@ -28,6 +28,21 @@ $(document).ready(function() {
   'signInFlow': 'popup',
   'signInOptions': [
     // TODO(developer): Remove the providers you don't need for your app.
+    {
+      provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      scopes: ['https://www.googleapis.com/auth/plus.login']
+    },
+    {
+      provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+      scopes :[
+        'public_profile',
+        'email',
+        'user_likes',
+        'user_friends'
+      ]
+    },
+    firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+    firebase.auth.GithubAuthProvider.PROVIDER_ID,
     firebase.auth.EmailAuthProvider.PROVIDER_ID
   ],
   // Terms of service url.
@@ -39,66 +54,160 @@ $(document).ready(function() {
   // The start method will wait until the DOM is loaded.
   ui.start('#firebaseAuth', uiConfig);
 
-   /**
-   * Displays the UI for a signed in user.
-   */
-  var handleSignedInUser = function(user) {
-    currentUid = user.uid;
-    document.getElementById('user-signed-in').style.display = 'block';
-    document.getElementById('user-signed-out').style.display = 'none';
-    document.getElementById('name').textContent = user.displayName;
-    document.getElementById('email').textContent = user.email;
-    if (user.photoURL){
-      document.getElementById('photo').src = user.photoURL;
-      document.getElementById('photo').style.display = 'block';
+  function toggleSignIn() {
+    if (firebase.auth().currentUser) {
+      // [START signout]
+      firebase.auth().signOut();
+      // [END signout]
     } else {
-      document.getElementById('photo').style.display = 'none';
+      var email = document.getElementById('email').value;
+      var password = document.getElementById('password').value;
+      if (email.length < 4) {
+        alert('Please enter an email address.');
+        return;
+      }
+      if (password.length < 4) {
+        alert('Please enter a password.');
+        return;
+      }
+      // Sign in with email and pass.
+      // [START authwithemail]
+      firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // [START_EXCLUDE]
+        if (errorCode === 'auth/wrong-password') {
+          alert('Wrong password.');
+        } else {
+          alert(errorMessage);
+        }
+        console.log(error);
+        document.getElementById('quickstart-sign-in').disabled = false;
+        // [END_EXCLUDE]
+      });
+      // [END authwithemail]
     }
-  };
-
-
+    document.getElementById('quickstart-sign-in').disabled = true;
+  }
   /**
-   * Displays the UI for a signed out user.
+   * Handles the sign up button press.
    */
-  var handleSignedOutUser = function() {
-    document.getElementById('user-signed-in').style.display = 'none';
-    document.getElementById('user-signed-out').style.display = 'block';
-    ui.start('#firebaseui-container', uiConfig);
-  };
-
-  // Listen to change in auth state so it displays the correct UI for when
-  // the user is signed in or not.
-  firebase.auth().onAuthStateChanged(function(user) {
-    // The observer is also triggered when the user's token has expired and is
-    // automatically refreshed. In that case, the user hasn't changed so we should
-    // not update the UI.
-    if (user && user.uid == currentUid) {
+  function handleSignUp() {
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+    if (email.length < 4) {
+      alert('Please enter an email address.');
       return;
     }
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('loaded').style.display = 'block';
-    user ? handleSignedInUser(user) : handleSignedOutUser();
-  });
-
-
-  /**
-   * Initializes the app.
-   */
-  var initApp = function() {
-    document.getElementById('sign-in-with-redirect').addEventListener(
-        'click', signInWithRedirect);
-    document.getElementById('sign-in-with-popup').addEventListener(
-        'click', signInWithPopup);
-    document.getElementById('sign-out').addEventListener('click', function() {
-      firebase.auth().signOut();
+    if (password.length < 4) {
+      alert('Please enter a password.');
+      return;
+    }
+    // Sign in with email and pass.
+    // [START createwithemail]
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // [START_EXCLUDE]
+      if (errorCode == 'auth/weak-password') {
+        alert('The password is too weak.');
+      } else {
+        alert(errorMessage);
+      }
+      console.log(error);
+      // [END_EXCLUDE]
     });
-    document.getElementById('delete-account').addEventListener(
-        'click', function() {
-          firebase.auth().currentUser.delete();
-        });
+    // [END createwithemail]
+  }
+  /**
+   * Sends an email verification to the user.
+   */
+  // function sendEmailVerification() {
+  //   // [START sendemailverification]
+  //   firebase.auth().currentUser.sendEmailVerification().then(function() {
+  //     // Email Verification sent!
+  //     // [START_EXCLUDE]
+  //     alert('Email Verification Sent!');
+  //     // [END_EXCLUDE]
+  //   });
+  //   // [END sendemailverification]
+  // }
+  function sendPasswordReset() {
+    var email = document.getElementById('email').value;
+    // [START sendpasswordemail]
+    firebase.auth().sendPasswordResetEmail(email).then(function() {
+      // Password Reset Email Sent!
+      // [START_EXCLUDE]
+      alert('Password Reset Email Sent!');
+      // [END_EXCLUDE]
+    }).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // [START_EXCLUDE]
+      if (errorCode == 'auth/invalid-email') {
+        alert(errorMessage);
+      } else if (errorCode == 'auth/user-not-found') {
+        alert(errorMessage);
+      }
+      console.log(error);
+      // [END_EXCLUDE]
+    });
+    // [END sendpasswordemail];
+  }
+  /**
+   * initApp handles setting up UI event listeners and registering Firebase auth listeners:
+   *  - firebase.auth().onAuthStateChanged: This listener is called when the user is signed in or
+   *    out, and that is where we update the UI.
+   */
+  function initApp() {
+    // Listening for auth state changes.
+    // [START authstatelistener]
+    firebase.auth().onAuthStateChanged(function(user) {
+      // [START_EXCLUDE silent]
+      // document.getElementById('quickstart-verify-email').disabled = true;
+      // [END_EXCLUDE]
+      if (user) {
+        // User is signed in.
+        var displayName = user.displayName;
+        var email = user.email;
+        var emailVerified = user.emailVerified;
+        var photoURL = user.photoURL;
+        var isAnonymous = user.isAnonymous;
+        var uid = user.uid;
+        var providerData = user.providerData;
+        // [START_EXCLUDE silent]
+        document.getElementById('quickstart-sign-in-status').textContent = 'Signed in';
+        document.getElementById('quickstart-sign-in').textContent = 'Sign out';
+        // document.getElementById('quickstart-account-details').textContent = JSON.stringify(user, null, '  ');
+        // if (!emailVerified) {
+        //   document.getElementById('quickstart-verify-email').disabled = false;
+        // }
+        // [END_EXCLUDE]
+      } else {
+        // User is signed out.
+        // [START_EXCLUDE silent]
+        document.getElementById('quickstart-sign-in-status').textContent = 'Signed out';
+        document.getElementById('quickstart-sign-in').textContent = 'Sign in';
+        // document.getElementById('quickstart-account-details').textContent = 'null';
+        // [END_EXCLUDE]
+      }
+      // [START_EXCLUDE silent]
+      document.getElementById('quickstart-sign-in').disabled = false;
+      // [END_EXCLUDE]
+    });
+    // [END authstatelistener]
+    document.getElementById('quickstart-sign-in').addEventListener('click', toggleSignIn, false);
+    document.getElementById('quickstart-sign-up').addEventListener('click', handleSignUp, false);
+    // document.getElementById('quickstart-verify-email').addEventListener('click', sendEmailVerification, false);
+    // document.getElementById('quickstart-password-reset').addEventListener('click', sendPasswordReset, false);
+  }
+  window.onload = function() {
+    initApp();
+    $('#firebaseAuth').addClass('disable');
   };
-
-  window.addEventListener('load', initApp);
 
   // app logic
   var signIn = true;
@@ -126,7 +235,7 @@ $(document).ready(function() {
       name = ref.name;
 
       $('#new').removeClass('disable');
-      // $('#firebaseAuth').addClass('disable');
+      $('#firebaseAuth').addClass('disable');
     }
   })
   // new card constructor
@@ -137,7 +246,7 @@ $(document).ready(function() {
   }
 
   $('.welcome').fadeIn(1000*3);
-  // $('#firebaseAuth').addClass('disable');
+  $('#firebaseAuth').addClass('disable');
 
   // sign in scroll
   // $(window).scroll(function() {
