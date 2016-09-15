@@ -126,7 +126,7 @@ $(document).ready(function() {
       name = ref.name;
 
       $('#new').removeClass('disable');
-      $('#firebaseAuth').addClass('disable');
+      // $('#firebaseAuth').addClass('disable');
     }
   })
   // new card constructor
@@ -137,7 +137,7 @@ $(document).ready(function() {
   }
 
   $('.welcome').fadeIn(1000*3);
-  $('#firebaseAuth').addClass('disable');
+  // $('#firebaseAuth').addClass('disable');
 
   // sign in scroll
   // $(window).scroll(function() {
