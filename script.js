@@ -83,12 +83,12 @@ $(document).ready(function() {
           alert(errorMessage);
         }
         console.log(error);
-        document.getElementById('quickstart-sign-in').disabled = false;
+        document.getElementsByClassName('quickstart-sign-in').disabled = false;
         // [END_EXCLUDE]
       });
       // [END authwithemail]
     }
-    document.getElementById('quickstart-sign-in').disabled = true;
+    document.getElementsByClassName('quickstart-sign-in').disabled = true;
   }
   /**
    * Handles the sign up button press.
@@ -180,7 +180,10 @@ $(document).ready(function() {
         var providerData = user.providerData;
         // [START_EXCLUDE silent]
         document.getElementById('quickstart-sign-in-status').textContent = 'Signed in';
-        document.getElementById('quickstart-sign-in').textContent = 'Sign out';
+        document.getElementsByClassName('quickstart-sign-in').textContent = 'Sign out';
+
+        $(document).off('scroll');
+        $('.welcome').css('display', 'none');
         // document.getElementById('quickstart-account-details').textContent = JSON.stringify(user, null, '  ');
         // if (!emailVerified) {
         //   document.getElementById('quickstart-verify-email').disabled = false;
@@ -190,23 +193,26 @@ $(document).ready(function() {
         // User is signed out.
         // [START_EXCLUDE silent]
         document.getElementById('quickstart-sign-in-status').textContent = 'Signed out';
-        document.getElementById('quickstart-sign-in').textContent = 'Sign in';
+
+        document.getElementsByClassName('quickstart-sign-in')[0].textContent = 'Sign in';
+        // document.getElementsByClassName('quickstart-sign-in')[1].textContent = 'Sign in';
         // document.getElementById('quickstart-account-details').textContent = 'null';
         // [END_EXCLUDE]
       }
       // [START_EXCLUDE silent]
-      document.getElementById('quickstart-sign-in').disabled = false;
+      document.getElementsByClassName('quickstart-sign-in')[0].disabled = false;
+      // document.getElementsByClassName('quickstart-sign-in')[1].disabled = false;
       // [END_EXCLUDE]
     });
     // [END authstatelistener]
-    document.getElementById('quickstart-sign-in').addEventListener('click', toggleSignIn, false);
+    document.getElementsByClassName('quickstart-sign-in')[0].addEventListener('click', toggleSignIn, false);
+    // document.getElementsByClassName('quickstart-sign-in')[1].addEventListener('click', toggleSignIn, false);
     document.getElementById('quickstart-sign-up').addEventListener('click', handleSignUp, false);
     // document.getElementById('quickstart-verify-email').addEventListener('click', sendEmailVerification, false);
     // document.getElementById('quickstart-password-reset').addEventListener('click', sendPasswordReset, false);
   }
   window.onload = function() {
     initApp();
-    $('#firebaseAuth').addClass('disable');
   };
 
   // app logic
@@ -234,8 +240,9 @@ $(document).ready(function() {
       email = ref.email;
       name = ref.name;
 
-      $('#new').removeClass('disable');
-      $('#firebaseAuth').addClass('disable');
+      $('.welcome').css({height: '0', width: '0', margin: 0});
+      $('.main').removeClass('disable');
+      $('.authBox').addClass('disable');
     }
   })
   // new card constructor
@@ -246,14 +253,15 @@ $(document).ready(function() {
   }
 
   $('.welcome').fadeIn(1000*3);
-  $('#firebaseAuth').addClass('disable');
 
   // sign in scroll
-  // $(window).scroll(function() {
-  //   $('.welcome').animate({top: '-1000px', opacity: '0'}, 1000*2)
-  //     .addClass('disable');
-  //   $('#firebaseAuth').removeClass('disable').animate({top: '30vh'}, 1000*2);
-  // })
+  $(document).scroll(function() {
+    $(document).scrollTop(0);
+    $('.welcome').animate({top: '-1000px', opacity: '0'}, 1000*1.5)
+      .addClass('disable');
+    $('.authBox').removeClass('disable').animate({top: '30vh'}, 1000*2);
+    $(window).off('scroll');
+  })
 
   // create new deck
   $('#newDeck').click(function() {

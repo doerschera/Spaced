@@ -19,9 +19,14 @@ body {
     line-height: 60px;
     color: #660066;
     margin-left: 20px; }
-  .welcome .arrow {
-    text-align: center;
-    margin-top: 0;
-    margin-bottom: 30vh; }
+
+.arrow {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 30vh; }
+
+.authBox {
+  position: absolute;
+  left: 40%; }
 
 /*# sourceMappingURL=style.css.map */

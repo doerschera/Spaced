@@ -32,12 +32,17 @@ body {
     color: $purple;
     margin-left: 20px;
   }
+}
 
-  .arrow {
-    text-align: center;
-    margin : {
-      top: 0;
-      bottom: 30vh;
-    }
+.arrow {
+  text-align: center;
+  margin : {
+    top: 10px;
+    bottom: 30vh;
   }
+}
+
+.authBox {
+  position: absolute;
+  left: 40%;
 }
