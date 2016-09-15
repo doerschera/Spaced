@@ -1,0 +1,43 @@
+@import 'https://fonts.googleapis.com/css?family=Quicksand|Source+Sans+Pro:300,400';
+@import "Helpers/variables";
+@import "Helpers/mixins";
+
+
+body {
+  font : {
+    family: $source-sans;
+    weight: 300;
+  }
+}
+
+.disable {
+  display: none;
+}
+
+#landing {
+  width: 100vh;
+  height: 100vh;
+}
+
+.welcome {
+  display: none;
+  margin-top: 20vh;
+
+  h1 {
+    font : {
+      family: $quicksand;
+      size: 50px;
+    }
+    line-height: 60px;
+    color: $purple;
+    margin-left: 20px;
+  }
+
+  .arrow {
+    text-align: center;
+    margin : {
+      top: 0;
+      bottom: 30vh;
+    }
+  }
+}

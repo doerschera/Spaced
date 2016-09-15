@@ -1,0 +1,27 @@
+@import "https://fonts.googleapis.com/css?family=Quicksand|Source+Sans+Pro:300,400";
+body {
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 300; }
+
+.disable {
+  display: none; }
+
+#landing {
+  width: 100vh;
+  height: 100vh; }
+
+.welcome {
+  display: none;
+  margin-top: 20vh; }
+  .welcome h1 {
+    font-family: "Quicksand", sans-serif;
+    font-size: 50px;
+    line-height: 60px;
+    color: #660066;
+    margin-left: 20px; }
+  .welcome .arrow {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 30vh; }
+
+/*# sourceMappingURL=style.css.map */
