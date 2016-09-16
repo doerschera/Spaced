@@ -244,6 +244,7 @@ $(document).ready(function() {
       $('.main').removeClass('disable');
       $('.authBox, #landingHead').addClass('disable');
       $('#landingHead').css('display', 'none');
+      populateDash();
     }
   })
   // new card constructor
@@ -286,7 +287,7 @@ $(document).ready(function() {
   $('#start').click(function() {
     $('#new').addClass('disable');
     $('#review').removeClass('disable');
-    firebase.database().ref('users/'+uid).update({
+    firebase.database().ref('users/'+uid+'time').update({
       time: 'null'
     })
     console.log(deckName);
@@ -302,6 +303,18 @@ $(document).ready(function() {
   $('#submit').click(function() {
     checkAnswer();
   })
+
+  function populateDash() {
+    var ref = firebase.database().ref('/users/'+uid);
+    ref.once('value').then(function(snapshot) {
+      var decksNum = snapshot.numChildren();
+      snapshot.forEach(function(snapshotChild) {
+        var deckTitle = snapshotChild.key;
+        var newDeckDiv = $('<div class="deck col-xs-6 col-sm-4"><a href="#"><h2>'+deckTitle+'</h2></a></div>');
+        $('.userDecks').prepend(newDeckDiv);
+      })
+    })
+  }
 
   function newDeck() {
     deckName = $('#deckName').val().trim();
@@ -351,7 +364,7 @@ $(document).ready(function() {
 
   function setTime() {
     var newView = moment().format();
-    firebase.database().ref('users/' + uid).update({time: newView});
+    firebase.database().ref('users/' + uid+'/time').update({time: newView});
   }
 
   function getCard() {
@@ -393,7 +406,7 @@ $(document).ready(function() {
   function determineLevels() {
     length = parseInt(length);
     var cardRef = firebase.database().ref('/users/'+uid+'/'+deckName+'/cards');
-    var timeRef = firebase.database().ref('/users/'+uid);
+    var timeRef = firebase.database().ref('/users/'+uid+'/time');
 
     timeRef.once('value').then(function(snapshot) {
       var lastView = snapshot.child('time').val();
@@ -436,8 +449,6 @@ $(document).ready(function() {
         getCard();
       })
     })
-
-
   }
 
 })
