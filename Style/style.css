@@ -110,32 +110,41 @@ h1 {
 
 .newDeck {
   margin-top: 150px; }
-  .newDeck .form-control {
-    border: none;
-    border-bottom: solid 1px #ffcc00;
-    border-radius: 0;
-    box-shadow: none;
-    margin: 0;
-    padding: 4px 0px;
-    width: 100%;
-    text-align: left;
-    color: #ffcc00;
-    font-family: "Quicksand", sans-serif;
-    font-size: 16px; }
-    .newDeck .form-control:first-child {
-      margin-bottom: 10px; }
-    .newDeck .form-control:focus {
-      border-color: transparent;
-      border-bottom: solid 2px #ffcc00;
-      box-shadow: none; }
-  .newDeck .btn {
-    border: solid 1px #ffcc00;
-    border-radius: 0;
-    background-color: #ffffff;
-    color: #ffcc00;
-    font-family: "Quicksand", sans-serif;
-    float: right; }
-    .newDeck .btn:hover {
-      border-width: 2px; }
+  .newDeck .deckHeading {
+    display: none; }
+    .newDeck .deckHeading h3 {
+      font-family: "Quicksand", sans-serif;
+      font-size: 40px;
+      color: #ffcc00; }
+  .newDeck .addName {
+    position: relative; }
+    .newDeck .addName .form-control {
+      border: none;
+      border-bottom: solid 1px #ffcc00;
+      border-radius: 0;
+      box-shadow: none;
+      margin: 0;
+      padding: 4px 0px;
+      width: 100%;
+      text-align: left;
+      color: #ffcc00;
+      font-family: "Quicksand", sans-serif;
+      font-size: 16px;
+      font-size: 24px; }
+      .newDeck .addName .form-control:first-child {
+        margin-bottom: 10px; }
+      .newDeck .addName .form-control:focus {
+        border-color: transparent;
+        border-bottom: solid 2px #ffcc00;
+        box-shadow: none; }
+    .newDeck .addName .btn {
+      border: solid 1px #ffcc00;
+      border-radius: 0;
+      background-color: #ffffff;
+      color: #ffcc00;
+      font-family: "Quicksand", sans-serif;
+      float: right; }
+      .newDeck .addName .btn:hover {
+        border-width: 2px; }
 
 /*# sourceMappingURL=style.css.map */

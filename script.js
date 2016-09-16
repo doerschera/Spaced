@@ -267,7 +267,12 @@ $(document).ready(function() {
   })
 
   // create new deck
-  $('#newDeck').click(function() {
+  $('#addDeckName').click(function() {
+    $(this).hide();
+    $('.addName').animate({bottom: '-=50px'}, 1000*.75, function() {
+      $('.addName').hide();
+      $('.deckHeading').show();
+    })
     newDeck();
   })
 

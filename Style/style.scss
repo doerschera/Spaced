@@ -111,11 +111,25 @@ h1 {
 
 .newDeck {
   margin-top: 150px;
-  .form-control {
-    @include form-control($yellow, $quicksand);
+  .deckHeading {
+    display: none;
+    h3 {
+      font : {
+        family: $quicksand;
+        size: 40px;
+      }
+      color: $yellow;
+    }
   }
-  .btn {
-    @include button($yellow);
-    float: right;
+  .addName {
+    position: relative;
+    .form-control {
+      @include form-control($yellow, $quicksand);
+      font-size: 24px;
+    }
+    .btn {
+      @include button($yellow);
+      float: right;
+    }
   }
 }
