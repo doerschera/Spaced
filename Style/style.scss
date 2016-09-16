@@ -14,6 +14,12 @@ body {
   display: none;
 }
 
+a {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 #landingHead {
   display: none;
 }
@@ -68,6 +74,8 @@ h1 {
 }
 
 #mainHeader {
+  position: absolute;
+  top: 0;
   h1 {
     color: $teal;
     display: inline-block;
@@ -89,6 +97,10 @@ h1 {
       -webkit-text-stroke-color: $teal;
     }
   }
+}
+
+.userDash {
+  margin-top: 150px;
 }
 
 .userDecks {

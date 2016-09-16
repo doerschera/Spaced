@@ -44,15 +44,16 @@
 
 @mixin decks($color) {
   border: solid 1px $color;
-  padding: 20px;
+  padding: 50px;
   h2 {
     color: $color;
     font : {
-      size: 30px;
+      size: 25px;
       font-family: $quicksand;
     }
     .glyphicon {
       color: $color;
+      font-size: 20px;
     }
   }
 }

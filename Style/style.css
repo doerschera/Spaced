@@ -6,6 +6,9 @@ body {
 .disable {
   display: none; }
 
+a:hover {
+  text-decoration: none; }
+
 #landingHead {
   display: none; }
 
@@ -64,37 +67,44 @@ h1 {
     .authBox .btn:hover {
       border-width: 2px; }
 
-#mainHeader h1 {
-  color: #008080;
-  display: inline-block; }
-#mainHeader h1, #mainHeader ul, #mainHeader li {
-  display: inline-block; }
-#mainHeader ul {
-  list-style: none;
-  float: right;
-  margin-top: 20px; }
-#mainHeader .btn {
-  border: solid 1px #008080;
-  border-radius: 0;
-  background-color: #ffffff;
-  color: #008080;
-  font-family: "Quicksand", sans-serif;
-  border: none;
-  font-size: 12px; }
-  #mainHeader .btn:hover {
-    border-width: 2px; }
-  #mainHeader .btn:hover {
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #008080; }
+#mainHeader {
+  position: absolute;
+  top: 0; }
+  #mainHeader h1 {
+    color: #008080;
+    display: inline-block; }
+  #mainHeader h1, #mainHeader ul, #mainHeader li {
+    display: inline-block; }
+  #mainHeader ul {
+    list-style: none;
+    float: right;
+    margin-top: 20px; }
+  #mainHeader .btn {
+    border: solid 1px #008080;
+    border-radius: 0;
+    background-color: #ffffff;
+    color: #008080;
+    font-family: "Quicksand", sans-serif;
+    border: none;
+    font-size: 12px; }
+    #mainHeader .btn:hover {
+      border-width: 2px; }
+    #mainHeader .btn:hover {
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: #008080; }
+
+.userDash {
+  margin-top: 150px; }
 
 .userDecks div {
   border: solid 1px #008080;
-  padding: 20px; }
+  padding: 50px; }
   .userDecks div h2 {
     color: #008080;
-    font-size: 30px;
+    font-size: 25px;
     font-font-family: "Quicksand", sans-serif; }
     .userDecks div h2 .glyphicon {
-      color: #008080; }
+      color: #008080;
+      font-size: 20px; }
 
 /*# sourceMappingURL=style.css.map */
