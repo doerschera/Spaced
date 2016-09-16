@@ -87,4 +87,14 @@ h1 {
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #008080; }
 
+.userDecks div {
+  border: solid 1px #008080;
+  padding: 20px; }
+  .userDecks div h2 {
+    color: #008080;
+    font-size: 30px;
+    font-font-family: "Quicksand", sans-serif; }
+    .userDecks div h2 .glyphicon {
+      color: #008080; }
+
 /*# sourceMappingURL=style.css.map */

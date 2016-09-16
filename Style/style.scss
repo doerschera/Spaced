@@ -90,3 +90,9 @@ h1 {
     }
   }
 }
+
+.userDecks {
+  div {
+    @include decks($teal);
+  }
+}
