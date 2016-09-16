@@ -108,3 +108,14 @@ h1 {
     @include decks($teal);
   }
 }
+
+.newDeck {
+  margin-top: 150px;
+  .form-control {
+    @include form-control($yellow, $quicksand);
+  }
+  .btn {
+    @include button($yellow);
+    float: right;
+  }
+}
