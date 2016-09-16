@@ -95,20 +95,36 @@ h1 {
 
 .userDash {
   margin-top: 150px; }
-
-.userDecks div {
-  margin-bottom: 20px; }
-.userDecks div > div {
-  border: solid 1px #008080;
-  padding: 50px; }
-  .userDecks div > div h2 {
-    color: #008080;
-    text-align: center;
-    font-size: 20px;
-    font-font-family: "Quicksand", sans-serif; }
-    .userDecks div > div h2 .glyphicon {
+  .userDash .userDecks div {
+    margin-bottom: 20px; }
+  .userDash .userDecks div > div {
+    border: solid 1px #008080;
+    padding: 50px;
+    max-height: 154px; }
+    .userDash .userDecks div > div h2 {
       color: #008080;
-      font-size: 15px; }
+      text-align: center;
+      vertical-align: middle;
+      font-size: 20px;
+      font-font-family: "Quicksand", sans-serif; }
+  .userDash .userDecks #newDeck {
+    border: none;
+    background-color: #008080; }
+    .userDash .userDecks #newDeck:hover {
+      border: solid 1px #008080;
+      padding: 50px;
+      max-height: 154px;
+      background-color: #ffffff; }
+      .userDash .userDecks #newDeck:hover h2 {
+        color: #008080;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 20px;
+        font-font-family: "Quicksand", sans-serif; }
+    .userDash .userDecks #newDeck h2 {
+      color: #ffffff; }
+      .userDash .userDecks #newDeck h2 .glyphicon {
+        font-size: 15px; }
 
 .newDeck {
   margin-top: 150px; }

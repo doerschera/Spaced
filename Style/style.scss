@@ -101,14 +101,27 @@ h1 {
 
 .userDash {
   margin-top: 150px;
-}
-
-.userDecks {
-  div {
-    margin-bottom: 20px;
-  }
-  div > div{
-    @include decks($teal);
+  .userDecks {
+    div {
+      margin-bottom: 20px;
+    }
+    div > div{
+      @include decks($teal);
+    }
+    #newDeck {
+      &:hover {
+        @include decks($teal);
+        background-color: #ffffff;
+      }
+      border: none;
+      background-color: $teal;
+      h2 {
+        color: #ffffff;
+        .glyphicon {
+          font-size: 15px;
+        }
+      }
+    }
   }
 }
 
