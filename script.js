@@ -310,8 +310,10 @@ $(document).ready(function() {
       var decksNum = snapshot.numChildren();
       snapshot.forEach(function(snapshotChild) {
         var deckTitle = snapshotChild.key;
-        var newDeckDiv = $('<div class="deck col-xs-6 col-sm-4"><a href="#"><h2>'+deckTitle+'</h2></a></div>');
-        $('.userDecks').prepend(newDeckDiv);
+        var wrapperDiv = $('<div class="col-xs-6 col-sm-4"></div>')
+        var newDeckDiv = $('<div class="deck"><a href="#"><h2>'+deckTitle+'</h2></a></div>');
+        var wrappedDeck = $(wrapperDiv).append(newDeckDiv);
+        $('.userDecks').prepend(wrappedDeck);
       })
     })
   }

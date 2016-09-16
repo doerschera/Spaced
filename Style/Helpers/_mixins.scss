@@ -47,13 +47,14 @@
   padding: 50px;
   h2 {
     color: $color;
+    text-align: center;
     font : {
-      size: 25px;
+      size: 20px;
       font-family: $quicksand;
     }
     .glyphicon {
       color: $color;
-      font-size: 20px;
+      font-size: 15px;
     }
   }
 }

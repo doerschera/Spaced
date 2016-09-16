@@ -96,15 +96,16 @@ h1 {
 .userDash {
   margin-top: 150px; }
 
-.userDecks div {
+.userDecks div > div {
   border: solid 1px #008080;
   padding: 50px; }
-  .userDecks div h2 {
+  .userDecks div > div h2 {
     color: #008080;
-    font-size: 25px;
+    text-align: center;
+    font-size: 20px;
     font-font-family: "Quicksand", sans-serif; }
-    .userDecks div h2 .glyphicon {
+    .userDecks div > div h2 .glyphicon {
       color: #008080;
-      font-size: 20px; }
+      font-size: 15px; }
 
 /*# sourceMappingURL=style.css.map */

@@ -104,7 +104,7 @@ h1 {
 }
 
 .userDecks {
-  div {
+  div > div{
     @include decks($teal);
   }
 }
