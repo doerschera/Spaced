@@ -44,12 +44,15 @@ h1 {
     top: 10px;
     bottom: 30vh;
   }
+  img {
+    width: 125px;
+  }
 }
 
 .authBox {
   @include solid-border($purple);
   position: absolute;
-  padding: 20px;
+  padding: 20px 50px;
 
   .p {
     font-family: $source-sans;
@@ -61,5 +64,29 @@ h1 {
 
   .btn {
     @include button($purple);
+  }
+}
+
+#mainHeader {
+  h1 {
+    color: $teal;
+    display: inline-block;
+  }
+  h1, ul, li {
+    display: inline-block;
+  }
+  ul {
+    list-style: none;
+    float: right;
+    margin-top: 20px;
+  }
+  .btn {
+    @include button($teal);
+    border: none;
+    font-size: 12px;
+    &:hover {
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: $teal;
+    }
   }
 }

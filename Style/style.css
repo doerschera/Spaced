@@ -28,11 +28,13 @@ h1 {
   text-align: center;
   margin-top: 10px;
   margin-bottom: 30vh; }
+  .arrow img {
+    width: 125px; }
 
 .authBox {
   border: solid 1px #660066;
   position: absolute;
-  padding: 20px; }
+  padding: 20px 50px; }
   .authBox .p {
     font-family: "Source Sans Pro", sans-serif; }
   .authBox .form-control {
@@ -61,5 +63,28 @@ h1 {
     font-family: "Quicksand", sans-serif; }
     .authBox .btn:hover {
       border-width: 2px; }
+
+#mainHeader h1 {
+  color: #008080;
+  display: inline-block; }
+#mainHeader h1, #mainHeader ul, #mainHeader li {
+  display: inline-block; }
+#mainHeader ul {
+  list-style: none;
+  float: right;
+  margin-top: 20px; }
+#mainHeader .btn {
+  border: solid 1px #008080;
+  border-radius: 0;
+  background-color: #ffffff;
+  color: #008080;
+  font-family: "Quicksand", sans-serif;
+  border: none;
+  font-size: 12px; }
+  #mainHeader .btn:hover {
+    border-width: 2px; }
+  #mainHeader .btn:hover {
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #008080; }
 
 /*# sourceMappingURL=style.css.map */

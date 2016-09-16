@@ -21,7 +21,7 @@
         <h1>Welcome to S_paced. S_paced is an online study tool that uses spaced repition to help you learn and retain information. Sign in below to get started.</h1>
       </div>
       <div class="welcome arrow col-xs-10 col-xs-offset-1">
-        <img src="Assests/arrowDown.png" alt="arrow down" id="arrowDown">
+        <img src="Assests/arrowDown.png" alt="arrow down">
       </div>
     </div>
 
@@ -52,15 +52,19 @@
     </div>
 
     <div class="disable main">
-      <header>
+      <header class="col-xs-12" id="mainHeader">
         <h1>S_paced</h1>
+        <ul>
+          <li><button class="btn" id="dashboard">Dashboard</button></li>
+          <li><button disabled class="btn quickstart-sign-in" name="signin"></button></li>
+        </ul>
       </header>
+
+
+
       <div class="container">
-        <button disabled class="mdl-button mdl-js-button mdl-button--raised quickstart-sign-in" name="signin">Sign In</button>
         <div id="new">
-          <div class="quickstart-user-details-container">
-            Current status: <span id="quickstart-sign-in-status">Unknown</span>
-          </div>
+          
           <div class="deck">
             Birds
           </div>

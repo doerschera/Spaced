@@ -180,7 +180,6 @@ $(document).ready(function() {
         var uid = user.uid;
         var providerData = user.providerData;
         // [START_EXCLUDE silent]
-        document.getElementById('quickstart-sign-in-status').textContent = 'Signed_In';
         $('.quickstart-sign-in').html('Sign_Out');
         // document.getElementsByClassName('quickstart-sign-in')[1].textContent = 'Sign out';
 
@@ -194,7 +193,6 @@ $(document).ready(function() {
       } else {
         // User is signed out.
         // [START_EXCLUDE silent]
-        document.getElementById('quickstart-sign-in-status').textContent = 'Signed_Out';
 
         // document.getElementsByClassName('quickstart-sign-in')[0].textContent = 'Sign in';
         $('.quickstart-sign-in').html('Sign_In');
