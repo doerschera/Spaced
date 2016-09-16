@@ -51,6 +51,10 @@ h1 {
   position: absolute;
   padding: 20px;
 
+  .p {
+    font-family: $source-sans;
+  }
+
   .form-control {
     @include form-control($purple, $quicksand);
   }
