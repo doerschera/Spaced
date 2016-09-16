@@ -96,6 +96,8 @@ h1 {
 .userDash {
   margin-top: 150px; }
 
+.userDecks div {
+  margin-bottom: 20px; }
 .userDecks div > div {
   border: solid 1px #008080;
   padding: 50px; }
@@ -110,9 +112,19 @@ h1 {
 
 .newDeck {
   margin-top: 150px; }
+  .newDeck .btn {
+    border: solid 1px #990000;
+    border-radius: 0;
+    background-color: #ffffff;
+    color: #990000;
+    font-family: "Quicksand", sans-serif;
+    float: right; }
+    .newDeck .btn:hover {
+      border-width: 2px; }
   .newDeck .deckHeading {
     display: none; }
     .newDeck .deckHeading h3 {
+      margin-bottom: 0;
       font-family: "Quicksand", sans-serif;
       font-size: 40px;
       color: #990000; }
@@ -137,14 +149,44 @@ h1 {
         border-color: transparent;
         border-bottom: solid 2px #990000;
         box-shadow: none; }
-    .newDeck .addName .btn {
-      border: solid 1px #990000;
-      border-radius: 0;
-      background-color: #ffffff;
+  .newDeck .cardInput {
+    margin-top: 30px; }
+    .newDeck .cardInput p {
+      margin-top: 10px;
       color: #990000;
-      font-family: "Quicksand", sans-serif;
-      float: right; }
-      .newDeck .addName .btn:hover {
-        border-width: 2px; }
+      font-family: "Source Sans Pro", sans-serif;
+      font-size: 14px; }
+    .newDeck .cardInput .contentEditable {
+      height: 150px;
+      position: relative;
+      border: none;
+      border-bottom: solid 1px #990000;
+      border-radius: 0;
+      box-shadow: none;
+      margin: 0;
+      padding: 4px 0px;
+      width: 100%;
+      text-align: left;
+      color: #990000;
+      font-family: "Source Sans Pro", sans-serif;
+      font-size: 16px; }
+      .newDeck .cardInput .contentEditable:first-child {
+        margin-bottom: 10px; }
+      .newDeck .cardInput .contentEditable:focus {
+        border-color: transparent;
+        border-bottom: solid 2px #990000;
+        box-shadow: none; }
+      .newDeck .cardInput .contentEditable p {
+        font-family: "Source Sans Pro", sans-serif;
+        vertical-align: text-bottom;
+        font-size: 20px;
+        margin-bottom: 3px;
+        color: #8c8c8c;
+        position: absolute;
+        bottom: 0; }
+        .newDeck .cardInput .contentEditable p:focus {
+          outline: 0px solid transparent; }
+    .newDeck .cardInput #viewCards {
+      margin-right: 10px; }
 
 /*# sourceMappingURL=style.css.map */

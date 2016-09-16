@@ -286,6 +286,12 @@ $(document).ready(function() {
     newDeck();
   })
 
+  $('#front').on('keypress', function() {
+    $(this).html(' ');
+    $(this).css('color', '#990000');
+  })
+
+
   // create new card
   $('#newCard').click(function() {
     writeCard();

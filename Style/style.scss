@@ -104,6 +104,9 @@ h1 {
 }
 
 .userDecks {
+  div {
+    margin-bottom: 20px;
+  }
   div > div{
     @include decks($teal);
   }
@@ -111,9 +114,14 @@ h1 {
 
 .newDeck {
   margin-top: 150px;
+  .btn {
+    @include button($red);
+    float: right;
+  }
   .deckHeading {
     display: none;
     h3 {
+      margin-bottom: 0;
       font : {
         family: $quicksand;
         size: 40px;
@@ -127,9 +135,36 @@ h1 {
       @include form-control($red, $quicksand);
       font-size: 24px;
     }
-    .btn {
-      @include button($red);
-      float: right;
+  }
+  .cardInput {
+    margin-top: 30px;
+    p {
+      margin-top: 10px;
+      color: $red;
+      font : {
+        family: $source-sans;
+        size: 14px;
+      }
+    }
+    .contentEditable {
+      height: 150px;
+      position: relative;
+      @include form-control($red, $source-sans);
+      p {
+        font-family: $source-sans;
+        vertical-align: text-bottom;
+        font-size: 20px;
+        margin-bottom: 3px;
+        color: #8c8c8c;
+        position: absolute;
+        bottom: 0;
+        &:focus{
+          outline: 0px solid transparent;
+        }
+      }
+    }
+    #viewCards {
+      margin-right: 10px;
     }
   }
 }
