@@ -282,11 +282,13 @@ $(document).ready(function() {
     $('.addName').animate({bottom: '-=50px'}, 1000*.75, function() {
       $('.addName').hide();
       $('.deckHeading').show();
+      $('.cardInput').removeClass('disable');
     })
     newDeck();
   })
 
-  $('#front').on('keypress', function() {
+  $('#front, #back').on('keypress', function() {
+    $('#front').off('keypress');
     $(this).html(' ');
     $(this).css('color', '#990000');
   })

@@ -157,7 +157,7 @@ h1 {
       font-family: "Source Sans Pro", sans-serif;
       font-size: 14px; }
     .newDeck .cardInput .contentEditable {
-      height: 150px;
+      height: 100px;
       position: relative;
       border: none;
       border-bottom: solid 1px #990000;

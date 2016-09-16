@@ -147,7 +147,7 @@ h1 {
       }
     }
     .contentEditable {
-      height: 150px;
+      height: 100px;
       position: relative;
       @include form-control($red, $source-sans);
       p {
