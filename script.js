@@ -267,6 +267,16 @@ $(document).ready(function() {
   })
 
   // create new deck
+  $('#newDeck').click(function() {
+    $('.userDash').addClass('disable');
+    $('.newDeck').removeClass('disable');
+    $('#mainHeader h1').css('color', '#990000');
+    $('#mainHeader .btn').css({
+      'color': '#990000',
+      'border-color': '#990000'
+    });
+  })
+
   $('#addDeckName').click(function() {
     $(this).hide();
     $('.addName').animate({bottom: '-=50px'}, 1000*.75, function() {
@@ -329,6 +339,8 @@ $(document).ready(function() {
     decks[deckName] = {
       cards: ['']
     };
+
+    $('.deckHeading h3').html(deckName);
     console.log(decks);
     firebase.database().ref('/users/'+uid).update(decks);
   }

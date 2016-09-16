@@ -118,17 +118,17 @@ h1 {
         family: $quicksand;
         size: 40px;
       }
-      color: $yellow;
+      color: $red;
     }
   }
   .addName {
     position: relative;
     .form-control {
-      @include form-control($yellow, $quicksand);
+      @include form-control($red, $quicksand);
       font-size: 24px;
     }
     .btn {
-      @include button($yellow);
+      @include button($red);
       float: right;
     }
   }
