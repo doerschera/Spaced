@@ -12,6 +12,10 @@
   </head>
   <body>
 
+    <header id="landingHead">
+      <h1>S_paced</h1>
+    </header>
+
     <div class="container">
       <div class="welcome row col-xs-10 col-xs-offset-1">
         <h1>Welcome to S_paced. S_paced is an online study tool that uses spaced repition to help you learn and retain information. Sign in below to get started.</h1>
@@ -22,28 +26,21 @@
     </div>
 
   <!-- Firebase Auth -->
-  <div class="disable authBox">
+  <div class="disable authBox col-xs-8 col-xs-offset-2">
         <div>
-          <h2>S_paced</h2>
-        </div>
-        <div>
-          <p>Enter an email and password below and either sign in to an existing account or sign up</p>
+          <p>Enter an email and password below to sign in or sign up</p>
 
-          <input class="mdl-textfield__input" style="display:inline;width:auto;" type="text" id="email" name="email" placeholder="Email"/>
+          <input class="form-control"  type="text" id="email" name="email" placeholder="Email"/>
           &nbsp;&nbsp;&nbsp;
-          <input class="mdl-textfield__input" style="display:inline;width:auto;" type="password" id="password" name="password" placeholder="Password"/>
+          <input class="form-control"  type="password" id="password" name="password" placeholder="Password"/>
           <br/><br/>
-          <button disabled class="mdl-button mdl-js-button mdl-button--raised quickstart-sign-in" name="signin">Sign In</button>
+          <button disabled class="btn quickstart-sign-in" name="signin">Sign_In</button>
           &nbsp;&nbsp;&nbsp;
-          <button class="mdl-button mdl-js-button mdl-button--raised" id="quickstart-sign-up" name="signup">Sign Up</button>
+          <button class="btn" id="quickstart-sign-up" name="signup">Sign_Up</button>
           &nbsp;&nbsp;&nbsp;
           <!-- <button class="mdl-button mdl-js-button mdl-button--raised" disabled id="quickstart-verify-email" name="verify-email">Send Email Verification</button>
           &nbsp;&nbsp;&nbsp; -->
           <!-- <button class="mdl-button mdl-js-button mdl-button--raised" id="quickstart-password-reset" name="verify-email">Send Password Reset Email</button> -->
-
-          <div class="quickstart-user-details-container">
-            Current status: <span id="quickstart-sign-in-status">Unknown</span>
-          </div>
 
           <!-- Container where we'll display the user details -->
           <!-- <div class="quickstart-user-details-container">
@@ -58,40 +55,49 @@
       <header>
         <h1>S_paced</h1>
       </header>
+      <div class="container">
+        <button disabled class="mdl-button mdl-js-button mdl-button--raised quickstart-sign-in" name="signin">Sign In</button>
+        <div id="new">
+          <div class="quickstart-user-details-container">
+            Current status: <span id="quickstart-sign-in-status">Unknown</span>
+          </div>
+          <div class="deck">
+            Birds
+          </div>
+          <form class="form-group">
+            <label for="front">Front:</label>
+            <textarea class="form-control" rows="1" cols="40" id="deckName"></textarea>
+          </form>
+          <button type="button" class="btn btn-default" id="newDeck">New Deck</button>
+          <form class="form-group">
+            <label for="front">Front:</label>
+            <textarea class="form-control" rows="8" cols="40" id="front"></textarea>
+          </form>
+          <form class="form-group">
+            <label for="front">Back:</label>
+            <textarea class="form-control" rows="8" cols="40" id="back"></textarea>
+          </form>
 
-      <div id="new">
-        <form class="form-group">
-          <label for="front">Front:</label>
-          <textarea class="form-control" rows="1" cols="40" id="deckName"></textarea>
-        </form>
-        <button type="button" class="btn btn-default" id="newDeck">New Deck</button>
-        <form class="form-group">
-          <label for="front">Front:</label>
-          <textarea class="form-control" rows="8" cols="40" id="front"></textarea>
-        </form>
-        <form class="form-group">
-          <label for="front">Back:</label>
-          <textarea class="form-control" rows="8" cols="40" id="back"></textarea>
-        </form>
+          <button type="button" class="btn btn-default" id="newCard">New Card</button>
 
-        <button type="button" class="btn btn-default" id="newCard">New Card</button>
-
-        <button type="button" class="btn btn-default" id="start">Start</button>
-      </div>
-
-      <div class="disable deck">Birds</div>
-
-      <div class="disable " id="review">
-        <div class="" id="cardFront">
-
+          <button type="button" class="btn btn-default" id="start">Start</button>
         </div>
-        <form class="form-group">
-          <label for="front">Answer:</label>
-          <textarea class="form-control" rows="1" cols="40" id="answer"></textarea>
-        </form>
-        <button type="button" class="btn btn-default" id="submit">Submit</button>
+
+        <div class="disable deck">Birds</div>
+
+        <div class="disable " id="review">
+          <div class="" id="cardFront">
+
+          </div>
+          <form class="form-group">
+            <label for="front">Answer:</label>
+            <textarea class="form-control" rows="1" cols="40" id="answer"></textarea>
+          </form>
+          <button type="button" class="btn btn-default" id="submit">Submit</button>
+        </div>
       </div>
-    </div>
+      </div>
+
 
 
 

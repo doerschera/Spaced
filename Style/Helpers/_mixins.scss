@@ -1,0 +1,43 @@
+@mixin solid-border($color) {
+  border: solid 1px $color;
+}
+
+@mixin form-control($color, $font) {
+  border: none;
+  border : {
+    bottom: solid 1px $color;
+    radius: 0;
+  }
+  box-shadow: none;
+  margin: 0;
+  padding: 4px 0px;
+  width: 100%;
+  text-align: left;
+  color: $color;
+  font : {
+    family: $font;
+    size: 16px;
+  }
+
+  &:first-child {
+    margin-bottom: 10px;
+  }
+  &:focus {
+    border : {
+      color: transparent;
+      bottom: solid 2px $color;
+    }
+    box-shadow: none;
+  }
+}
+
+@mixin button($color) {
+  border: solid 1px $color;
+  border-radius: 0;
+  background-color: #ffffff;
+  color: $color;
+  font-family: $quicksand;
+  &:hover {
+    border-width: 2px;
+  }
+}

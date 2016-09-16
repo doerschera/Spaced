@@ -6,6 +6,16 @@ body {
 .disable {
   display: none; }
 
+#landingHead {
+  display: none; }
+
+h1 {
+  font-family: "Quicksand", sans-serif;
+  font-size: 50px;
+  line-height: 60px;
+  color: #660066;
+  margin-left: 20px; }
+
 #landing {
   width: 100vh;
   height: 100vh; }
@@ -13,12 +23,6 @@ body {
 .welcome {
   display: none;
   margin-top: 20vh; }
-  .welcome h1 {
-    font-family: "Quicksand", sans-serif;
-    font-size: 50px;
-    line-height: 60px;
-    color: #660066;
-    margin-left: 20px; }
 
 .arrow {
   text-align: center;
@@ -26,7 +30,34 @@ body {
   margin-bottom: 30vh; }
 
 .authBox {
+  border: solid 1px #660066;
   position: absolute;
-  left: 40%; }
+  padding: 20px; }
+  .authBox .form-control {
+    border: none;
+    border-bottom: solid 1px #660066;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+    padding: 4px 0px;
+    width: 100%;
+    text-align: left;
+    color: #660066;
+    font-family: "Quicksand", sans-serif;
+    font-size: 16px; }
+    .authBox .form-control:first-child {
+      margin-bottom: 10px; }
+    .authBox .form-control:focus {
+      border-color: transparent;
+      border-bottom: solid 2px #660066;
+      box-shadow: none; }
+  .authBox .btn {
+    border: solid 1px #660066;
+    border-radius: 0;
+    background-color: #ffffff;
+    color: #660066;
+    font-family: "Quicksand", sans-serif; }
+    .authBox .btn:hover {
+      border-width: 2px; }
 
 /*# sourceMappingURL=style.css.map */
