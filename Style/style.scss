@@ -151,8 +151,14 @@ h1 {
   }
   .cardInput {
     margin-top: 30px;
+    h3 {
+      color: $red;
+      font-family: $quicksand;
+    }
     p {
       margin-top: 10px;
+      max-height: 112px;
+      overflow: auto;
       color: $red;
       font : {
         family: $source-sans;

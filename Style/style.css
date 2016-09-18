@@ -167,8 +167,13 @@ h1 {
         box-shadow: none; }
   .newDeck .cardInput {
     margin-top: 30px; }
+    .newDeck .cardInput h3 {
+      color: #990000;
+      font-family: "Quicksand", sans-serif; }
     .newDeck .cardInput p {
       margin-top: 10px;
+      max-height: 112px;
+      overflow: auto;
       color: #990000;
       font-family: "Source Sans Pro", sans-serif;
       font-size: 14px; }

@@ -278,19 +278,19 @@ $(document).ready(function() {
   })
 
   $('#addDeckName').click(function() {
-    $(this).hide();
-    $('.addName').animate({bottom: '-=50px'}, 1000*.75, function() {
-      $('.addName').hide();
-      $('.deckHeading').show();
-      $('.cardInput').removeClass('disable');
-    })
+    $('.addName').addClass('disable');
+    $('.cardInput').removeClass('disable');
+    $('.cardInput:first').prepend('<h3>');
+    $('.cardInput h3').html($('#deckName').val());
     newDeck();
   })
 
-  $('#front, #back').on('keypress', function() {
-    $('#front').off('keypress');
-    $(this).html(' ');
-    $(this).css('color', '#990000');
+  $('#front').on('keypress', function() {
+    contentEditable('#front');
+  })
+
+  $('#back').on('keypress', function() {
+    contentEditable('#back');
   })
 
 
@@ -353,12 +353,19 @@ $(document).ready(function() {
     firebase.database().ref('/users/'+uid).update(decks);
   }
 
+  function contentEditable(id) {
+    $(id).off('keypress');
+    $(id).html(' ');
+    $(id).css('color', '#990000');
+  }
+
   function writeCard() {
     front = $('#front').val().trim();
     back = $('#back').val().trim();
     var card = new Card(front, back);
     var ref = '/users/'+uid+'/'+deckName+'/cards'+ '/'+cardCounter;
 
+    console.log(card);
     firebase.database().ref(ref).set(card);
 
     cardCounter ++;
