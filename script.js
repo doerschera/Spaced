@@ -314,8 +314,20 @@ $(document).ready(function() {
 
   // select deck
   $(document).on('click', '.deck', function() {
-    deckName = $(this).html().trim();
+    deckName = $(this).find('h2').html().trim();
     console.log(deckName);
+
+    var contentDiv = $(this).children('div');
+
+    $(this).removeClass('col-xs-6 col-sm-4');
+    $(this).addClass('col-xs-12 col-sm-8');
+    contentDiv.css({
+      'height': '174px',
+      'padding': '0',
+    });
+    contentDiv.append('<p>card number</p>');
+    contentDiv.append('<p>last viewed</p>');
+
     $('.deck').off('click');
   })
 
@@ -354,8 +366,8 @@ $(document).ready(function() {
       var decksNum = snapshot.numChildren();
       snapshot.forEach(function(snapshotChild) {
         var deckTitle = snapshotChild.key;
-        var wrapperDiv = $('<div class="col-xs-6 col-sm-4"></div>')
-        var newDeckDiv = $('<div><a href="#"><h2 class="deck">'+deckTitle+'</h2></a></div>');
+        var wrapperDiv = $('<div class="deck col-xs-6 col-sm-4"></div>')
+        var newDeckDiv = $('<div><a href="#"><h2>'+deckTitle+'</h2></a></div>');
         var wrappedDeck = $(wrapperDiv).append(newDeckDiv);
         $('.userDecks').prepend(wrappedDeck);
       })

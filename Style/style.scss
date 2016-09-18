@@ -208,3 +208,9 @@ h1 {
     }
   }
 }
+
+.cardReview {
+  .reviewContent {
+    @include solid-border($blue);
+  }
+}
