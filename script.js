@@ -232,6 +232,10 @@ $(document).ready(function() {
   var level = 1;
   var keypressF = true;
   var keypressB = true;
+  var red = '#990000';
+  var teal = '#008080';
+  var pruple = '#660066';
+  var blue = '#66ccff';
 
 
 
@@ -272,11 +276,7 @@ $(document).ready(function() {
   $('#newDeck').click(function() {
     $('.userDash').addClass('disable');
     $('.newDeck').removeClass('disable');
-    $('#mainHeader h1').css('color', '#990000');
-    $('#mainHeader .btn').css({
-      'color': '#990000',
-      'border-color': '#990000'
-    });
+    changeColor(red);
   })
 
   $('#addDeckName').click(function() {
@@ -303,6 +303,13 @@ $(document).ready(function() {
     writeCard();
     displayNewCard();
     addCardReset();
+  })
+
+  // done adding cards to new deck
+  $('#done').click(function() {
+    $('.newDeck, .cardDisplay').addClass('disable');
+    $('.userDash').removeClass('disable');
+    changeColor(teal);
   })
 
   // select deck
@@ -332,6 +339,14 @@ $(document).ready(function() {
   $('#submit').click(function() {
     checkAnswer();
   })
+
+  function changeColor(color) {
+    $('#mainHeader h1').css('color', color);
+    $('#mainHeader .btn').css({
+      'color': color,
+      'border-color': color
+    });
+  }
 
   function populateDash() {
     var ref = firebase.database().ref('/users/'+uid);
@@ -390,6 +405,8 @@ $(document).ready(function() {
   function displayNewCard() {
     var frontDiv = $('<div class="col-xs-6"></div>');
     var backDiv = $('<div class="col-xs-6"></div>');
+
+    $('.cardDisplay').removeClass('disable');
 
     $(frontDiv).append('<p>Front:</p>');
     $(frontDiv).append('<p>'+$('#front').html()+'</p>');

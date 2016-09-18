@@ -207,7 +207,7 @@ h1 {
         bottom: 0; }
         .newDeck .cardInput .contentEditable p:focus {
           outline: 0px solid transparent; }
-    .newDeck .cardInput #viewCards {
+    .newDeck .cardInput #done {
       margin-right: 10px; }
 
 .cardDisplay {
