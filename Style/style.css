@@ -210,4 +210,16 @@ h1 {
     .newDeck .cardInput #viewCards {
       margin-right: 10px; }
 
+.cardDisplay {
+  margin-top: 60px; }
+  .cardDisplay div {
+    border: solid 1px #990000;
+    margin-top: 40px;
+    padding: 20px; }
+    .cardDisplay div:nth-child(even) {
+      border-left: none; }
+    .cardDisplay div p {
+      font-family: "Source Sans Pro", sans-serif;
+      color: #990000; }
+
 /*# sourceMappingURL=style.css.map */

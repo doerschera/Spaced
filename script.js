@@ -230,6 +230,8 @@ $(document).ready(function() {
   var cardOrder = [];
   var nextCard = cardOrder[cardIndex];
   var level = 1;
+  var keypressF = true;
+  var keypressB = true;
 
 
 
@@ -285,18 +287,22 @@ $(document).ready(function() {
     newDeck();
   })
 
-  $('#front').on('keypress', function() {
-    contentEditable('#front');
+  $(document).on('keypress', '#front', function() {
+      contentEditable('#front', keypressF);
+      keypressF = false;
   })
 
-  $('#back').on('keypress', function() {
-    contentEditable('#back');
+  $(document).on('keypress', '#back', function() {
+    contentEditable('#back', keypressB);
+    keypressB =false;
   })
 
 
   // create new card
   $('#newCard').click(function() {
     writeCard();
+    displayNewCard();
+    addCardReset();
   })
 
   // select deck
@@ -353,22 +359,48 @@ $(document).ready(function() {
     firebase.database().ref('/users/'+uid).update(decks);
   }
 
-  function contentEditable(id) {
-    $(id).off('keypress');
-    $(id).html(' ');
-    $(id).css('color', '#990000');
+  function contentEditable(id, keypress) {
+    if(keypress) {
+      $(id).off('keypress');
+      $(id).html(' ');
+      $(id).css('color', '#990000');
+    }
   }
 
   function writeCard() {
-    front = $('#front').val().trim();
-    back = $('#back').val().trim();
+    front = $('#front').html().trim();
+    back = $('#back').html().trim();
     var card = new Card(front, back);
     var ref = '/users/'+uid+'/'+deckName+'/cards'+ '/'+cardCounter;
 
-    console.log(card);
     firebase.database().ref(ref).set(card);
+  }
 
+  function addCardReset() {
+    keypressF = true;
+    keypressB = true;
     cardCounter ++;
+
+    $('#front').html('Card Front');
+    $('#back').html('Card Back');
+    $('#front, #back').css('color', '#8c8c8c');
+    $('.cardInput > p').html('Card_'+(cardCounter+1));
+  }
+
+  function displayNewCard() {
+    var frontDiv = $('<div class="col-xs-6"></div>');
+    var backDiv = $('<div class="col-xs-6"></div>');
+
+    $(frontDiv).append('<p>Front:</p>');
+    $(frontDiv).append('<p>'+$('#front').html()+'</p>');
+    $('.cardDisplay').append(frontDiv);
+
+    $(backDiv).append('<p>Back:</p>');
+    $(backDiv).append('<p>'+$('#back').html()+'</p>');
+    $('.cardDisplay').append(backDiv);
+
+    var divWidth = $('.cardDisplay > div').width();
+    $('.cardDisplay > div').css('height', divWidth+'px');
   }
 
   function deckLength() {
