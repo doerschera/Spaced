@@ -14,10 +14,12 @@ body {
   display: none;
 }
 
-a {
-  &:hover {
+a:visited, a:focus {
     text-decoration: none;
-  }
+}
+
+a:hover {
+  color: $teal;
 }
 
 #landingHead {
@@ -120,6 +122,9 @@ h1 {
         .glyphicon {
           font-size: 15px;
         }
+      }
+      a:hover {
+        text-decoration: none;
       }
     }
   }

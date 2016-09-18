@@ -313,7 +313,7 @@ $(document).ready(function() {
   })
 
   // select deck
-  $('.deck').on('click', function() {
+  $(document).on('click', '.deck', function() {
     deckName = $(this).html().trim();
     console.log(deckName);
     $('.deck').off('click');
@@ -355,7 +355,7 @@ $(document).ready(function() {
       snapshot.forEach(function(snapshotChild) {
         var deckTitle = snapshotChild.key;
         var wrapperDiv = $('<div class="col-xs-6 col-sm-4"></div>')
-        var newDeckDiv = $('<div class="deck"><a href="#"><h2>'+deckTitle+'</h2></a></div>');
+        var newDeckDiv = $('<div><a href="#"><h2 class="deck">'+deckTitle+'</h2></a></div>');
         var wrappedDeck = $(wrapperDiv).append(newDeckDiv);
         $('.userDecks').prepend(wrappedDeck);
       })
