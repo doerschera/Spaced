@@ -318,15 +318,21 @@ $(document).ready(function() {
     console.log(deckName);
 
     var contentDiv = $(this).children('div');
+    var height = $(this).height();
 
-    $(this).removeClass('col-xs-6 col-sm-4');
-    $(this).addClass('col-xs-12 col-sm-8');
+    contentDiv.addClass('clickedDeck');
+    contentDiv.css('max-height', height*2);
+    contentDiv.animate({height: height*2}, 'slow');
     contentDiv.css({
       'height': '174px',
-      'padding': '0',
+      'padding': '10px 0px',
     });
-    contentDiv.append('<p>card number</p>');
-    contentDiv.append('<p>last viewed</p>');
+    contentDiv.empty();
+    contentDiv.append('<h6>cards</h6>');
+    contentDiv.append('<h3>32</h3>');
+    contentDiv.append('<h6>last viewed</h6>');
+    contentDiv.append('<h4>September, 7th <br>2016</h4>');
+    contentDiv.append('<button>start</button');
 
     $('.deck').off('click');
   })

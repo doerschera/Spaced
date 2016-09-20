@@ -130,6 +130,32 @@ h1 {
         font-size: 15px; }
     .userDash .userDecks #newDeck a:hover {
       text-decoration: none; }
+  .userDash .clickedDeck {
+    text-align: center;
+    background-color: #008080;
+    padding-top: 10px; }
+    .userDash .clickedDeck h3, .userDash .clickedDeck h4, .userDash .clickedDeck h6 {
+      color: white;
+      font-size: 45px;
+      text-align: center;
+      margin-top: 5px;
+      margin-bottom: 15px; }
+    .userDash .clickedDeck h4 {
+      font-size: 30px; }
+    .userDash .clickedDeck h6 {
+      font-size: 14px;
+      margin-top: 40px;
+      margin-bottom: 5px; }
+    .userDash .clickedDeck button {
+      border: solid 1px white;
+      border-radius: 0;
+      background-color: #ffffff;
+      color: white;
+      font-family: "Quicksand", sans-serif;
+      margin-top: 20px;
+      background-color: transparent; }
+      .userDash .clickedDeck button:hover {
+        border-width: 2px; }
 
 .newDeck {
   margin-top: 150px; }
@@ -226,5 +252,8 @@ h1 {
     .cardDisplay div p {
       font-family: "Source Sans Pro", sans-serif;
       color: #990000; }
+
+.cardReview .reviewContent {
+  border: solid 1px #66ccff; }
 
 /*# sourceMappingURL=style.css.map */
