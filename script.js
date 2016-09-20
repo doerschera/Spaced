@@ -327,10 +327,11 @@ $(document).ready(function() {
     function deckInfo() {
       var monthDay;
       var year;
-      var timeRef = firebase.database().ref('users/'+uid+'/'+deckName+'/time');
+      var timeRef = firebase.database().ref('users/'+uid+'/'+deckName);
 
       timeRef.once('value').then(function(snapshot) {
-        var lastDate = snapshot.child('time').val();
+        var lastDate = snapshot.child('time').child('time').val();
+        length = snapshot.child('cards').val().length;
         console.log(lastDate);
         monthDay = moment(lastDate).format('MMMM Do');
         year = moment(lastDate).format('YYYY');
@@ -343,10 +344,10 @@ $(document).ready(function() {
         contentDiv.animate({height: height*2}, 'slow');
         contentDiv.empty();
         contentDiv.append('<h6>cards</h6>');
-        contentDiv.append('<h3>32</h3>');
+        contentDiv.append('<h3>'+length+'</h3>');
         contentDiv.append('<h6>last viewed</h6>');
         contentDiv.append('<h4>'+monthDay+'<br>'+year+'</h4>');
-        contentDiv.append('<button>start</button');
+        contentDiv.append('<button id="start">start</button');
       })
     }
 
@@ -370,17 +371,9 @@ $(document).ready(function() {
   $('#start').click(function() {
     $('#new').addClass('disable');
     $('#review').removeClass('disable');
-    // firebase.database().ref('users/'+uid+'/'+deckName'/time').update({
-    //   time: 'null'
-    // })
-    console.log(deckName);
-    var cardsRef = firebase.database().ref('/users/'+uid+'/'+deckName+'/cards');
-    cardsRef.once('value').then(function(snapshot) {
-      length = snapshot.val().length;
-      console.log(length);
       setTime();
       determineLevels();
-    })
+
   })
 
   $('#submit').click(function() {
