@@ -110,30 +110,11 @@ h1 {
       vertical-align: middle;
       font-size: 20px;
       font-font-family: "Quicksand", sans-serif; }
-  .userDash .userDecks #newDeck {
-    border: none;
-    background-color: #008080; }
-    .userDash .userDecks #newDeck:hover {
-      border: solid 1px #008080;
-      padding: 50px;
-      max-height: 154px;
-      background-color: #ffffff; }
-      .userDash .userDecks #newDeck:hover h2 {
-        color: #008080;
-        text-align: center;
-        vertical-align: middle;
-        font-size: 20px;
-        font-font-family: "Quicksand", sans-serif; }
-    .userDash .userDecks #newDeck h2 {
-      color: #ffffff; }
-      .userDash .userDecks #newDeck h2 .glyphicon {
-        font-size: 15px; }
-    .userDash .userDecks #newDeck a:hover {
-      text-decoration: none; }
+  .userDash .userDecks #newDeck .glyphicon {
+    font-size: 15px; }
   .userDash .clickedDeck {
     text-align: center;
-    background-color: #008080;
-    padding-top: 10px; }
+    background-color: #008080; }
     .userDash .clickedDeck h3, .userDash .clickedDeck h4, .userDash .clickedDeck h6 {
       color: white;
       font-size: 45px;
@@ -254,6 +235,52 @@ h1 {
       color: #990000; }
 
 .cardReview .reviewContent {
-  border: solid 1px #66ccff; }
+  border: solid 1px #66ccff;
+  padding: 50px;
+  margin-top: 150px;
+  margin-bottom: 50px; }
+  .cardReview .reviewContent h2 {
+    color: #66ccff;
+    font-family: "Quicksand", sans-serif;
+    text-align: center; }
+.cardReview .contentEditable {
+  height: 100px;
+  position: relative;
+  border: none;
+  border-bottom: solid 1px #66ccff;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
+  padding: 4px 0px;
+  width: 100%;
+  text-align: left;
+  color: #66ccff;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 16px; }
+  .cardReview .contentEditable:first-child {
+    margin-bottom: 10px; }
+  .cardReview .contentEditable:focus {
+    border-color: transparent;
+    border-bottom: solid 2px #66ccff;
+    box-shadow: none; }
+  .cardReview .contentEditable p {
+    font-family: "Source Sans Pro", sans-serif;
+    vertical-align: text-bottom;
+    font-size: 20px;
+    margin-bottom: 3px;
+    color: #8c8c8c;
+    position: absolute;
+    bottom: 0; }
+    .cardReview .contentEditable p:focus {
+      outline: 0px solid transparent; }
+.cardReview .btn {
+  border: solid 1px #66ccff;
+  border-radius: 0;
+  background-color: #ffffff;
+  color: #66ccff;
+  font-family: "Quicksand", sans-serif;
+  float: right; }
+  .cardReview .btn:hover {
+    border-width: 2px; }
 
 /*# sourceMappingURL=style.css.map */

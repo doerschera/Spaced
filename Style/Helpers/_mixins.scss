@@ -56,3 +56,21 @@
     }
   }
 }
+
+@mixin contentEditable($color){
+  height: 100px;
+  position: relative;
+  @include form-control($color, $source-sans);
+  p {
+    font-family: $source-sans;
+    vertical-align: text-bottom;
+    font-size: 20px;
+    margin-bottom: 3px;
+    color: #8c8c8c;
+    position: absolute;
+    bottom: 0;
+    &:focus{
+      outline: 0px solid transparent;
+    }
+  }
+}

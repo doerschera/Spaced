@@ -347,7 +347,7 @@ $(document).ready(function() {
         contentDiv.append('<h3>'+length+'</h3>');
         contentDiv.append('<h6>last viewed</h6>');
         contentDiv.append('<h4>'+monthDay+'<br>'+year+'</h4>');
-        contentDiv.append('<button id="start">start</button');
+        contentDiv.append('<button type="button" class="btn" id="start">start</button');
       })
     }
 
@@ -368,12 +368,11 @@ $(document).ready(function() {
   })
 
   // select card
-  $('#start').click(function() {
-    $('#new').addClass('disable');
-    $('#review').removeClass('disable');
+  $(document).on('click', '#start', function() {
+    $('.userDash, #landingHead').addClass('disable');
+    $('.cardReview').removeClass('disable');
       setTime();
       determineLevels();
-
   })
 
   $('#submit').click(function() {
@@ -501,7 +500,7 @@ $(document).ready(function() {
       console.log(cardFront);
       var newHeading = $('<h2>');
       newHeading = newHeading.html(cardFront);
-      $('#cardFront').append(newHeading);
+      $('.reviewContent').append(newHeading);
     })
   }
 

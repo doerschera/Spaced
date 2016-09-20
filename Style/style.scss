@@ -111,20 +111,8 @@ h1 {
       @include decks($teal);
     }
     #newDeck {
-      &:hover {
-        @include decks($teal);
-        background-color: #ffffff;
-      }
-      border: none;
-      background-color: $teal;
-      h2 {
-        color: #ffffff;
-        .glyphicon {
-          font-size: 15px;
-        }
-      }
-      a:hover {
-        text-decoration: none;
+      .glyphicon {
+        font-size: 15px;
       }
     }
   }
@@ -194,22 +182,8 @@ h1 {
         size: 14px;
       }
     }
-    .contentEditable {
-      height: 100px;
-      position: relative;
-      @include form-control($red, $source-sans);
-      p {
-        font-family: $source-sans;
-        vertical-align: text-bottom;
-        font-size: 20px;
-        margin-bottom: 3px;
-        color: #8c8c8c;
-        position: absolute;
-        bottom: 0;
-        &:focus{
-          outline: 0px solid transparent;
-        }
-      }
+    .contentEditable{
+      @include contentEditable($red);
     }
     #done {
       margin-right: 10px;
@@ -236,5 +210,20 @@ h1 {
 .cardReview {
   .reviewContent {
     @include solid-border($blue);
+    padding: 50px;
+    margin-top: 150px;
+    margin-bottom: 50px;
+    h2 {
+      color: $blue;
+      font-family: $quicksand;
+      text-align: center;
+    }
+  }
+  .contentEditable {
+    @include contentEditable($blue);
+  }
+  .btn {
+    @include button($blue);
+    float: right;
   }
 }
