@@ -238,11 +238,15 @@ h1 {
   border: solid 1px #66ccff;
   padding: 50px;
   margin-top: 150px;
-  margin-bottom: 50px; }
+  margin-bottom: 5px; }
   .cardReview .reviewContent h2 {
     color: #66ccff;
     font-family: "Quicksand", sans-serif;
     text-align: center; }
+.cardReview p {
+  color: #66ccff;
+  float: right;
+  margin-bottom: 50px; }
 .cardReview .contentEditable {
   height: 100px;
   position: relative;
@@ -282,5 +286,13 @@ h1 {
   float: right; }
   .cardReview .btn:hover {
     border-width: 2px; }
+.cardReview #next {
+  margin-right: 10px; }
+.cardReview img {
+  display: none;
+  position: absolute;
+  top: 165px;
+  right: 25vw;
+  width: 100px; }
 
 /*# sourceMappingURL=style.css.map */

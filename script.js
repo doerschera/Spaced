@@ -234,6 +234,7 @@ $(document).ready(function() {
   var level = 1;
   var keypressF = true;
   var keypressB = true;
+  var keypressA = true;
   var red = '#990000';
   var teal = '#008080';
   var pruple = '#660066';
@@ -290,15 +291,19 @@ $(document).ready(function() {
   })
 
   $(document).on('keypress', '#front', function() {
-      contentEditable('#front', keypressF);
+      contentEditable('#front', keypressF, red);
       keypressF = false;
   })
 
   $(document).on('keypress', '#back', function() {
-    contentEditable('#back', keypressB);
+    contentEditable('#back', keypressB, red);
     keypressB =false;
   })
 
+  $(document).on('keypress', '#answer', function() {
+    contentEditable('#answer', keypressA, blue);
+    keypressA =false;
+  })
 
   // create new card
   $('#newCard').click(function() {
@@ -369,14 +374,27 @@ $(document).ready(function() {
 
   // select card
   $(document).on('click', '#start', function() {
+    changeColor(blue);
     $('.userDash, #landingHead').addClass('disable');
     $('.cardReview').removeClass('disable');
       setTime();
       determineLevels();
   })
 
+  // submit answer
   $('#submit').click(function() {
     checkAnswer();
+  })
+
+  // next card
+  $('#next').click(function() {
+    $('.reviewContent').empty();
+    $('#answer').html('Your Answer');
+    $('#answer').removeAttr('style');
+    $('#submit').removeClass('disable');
+    $('#next').addClass('disable');
+    keypressA = true;
+    getCard();
   })
 
   function changeColor(color) {
@@ -414,17 +432,17 @@ $(document).ready(function() {
     setTime();
   }
 
-  function contentEditable(id, keypress) {
+  function contentEditable(id, keypress, color) {
     if(keypress) {
       $(id).off('keypress');
       $(id).html(' ');
-      $(id).css('color', '#990000');
+      $(id).css('color', color);
     }
   }
 
   function writeCard() {
-    front = $('#front').html().trim();
-    back = $('#back').html().trim();
+    front = $('#front').html().trim().toLowerCase();
+    back = $('#back').html().trim().toLowerCase();
     var card = new Card(front, back);
     var ref = '/users/'+uid+'/'+deckName+'/cards'+ '/'+cardCounter;
 
@@ -501,12 +519,17 @@ $(document).ready(function() {
       var newHeading = $('<h2>');
       newHeading = newHeading.html(cardFront);
       $('.reviewContent').append(newHeading);
+      $('#cardNumOf').html((cardCounter+1)+' of '+length);
     })
   }
 
   function checkAnswer() {
     var nextCard = cardOrder[cardIndex];
-    var answer = $('#answer').val().trim();
+    var answer = $('#answer').html().toLowerCase();
+    answer = answer.replace(/&nbsp/g, '');
+    answer = answer.trim();
+    console.log(answer);
+    cardIndex++;
     var cardsRef = firebase.database().ref('/users/'+uid+'/'+deckName+'/cards');
     cardsRef.child(nextCard).once('value').then(function(snapshot) {
       var correct = snapshot.child('back').val();
@@ -518,11 +541,16 @@ $(document).ready(function() {
         }
         cardsRef.child(nextCard).child('level').set(level)
         console.log(level);
+        $('#o').fadeIn('slow').delay(500).fadeOut('slow');
       } else {
         console.log('incorrect');
         cardsRef.child(nextCard).child('level').set(1);
-        $('#cardFront > h2').html('The correct answer is: '+correct);
+        $('#x').fadeIn('slow').delay(500).fadeOut('slow', function() {
+          $('.reviewContent > h2').html('The correct answer is: '+correct);
+        })
       }
+      $('#submit').addClass('disable');
+      $('#next').removeClass('disable');
     })
   }
 

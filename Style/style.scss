@@ -212,12 +212,17 @@ h1 {
     @include solid-border($blue);
     padding: 50px;
     margin-top: 150px;
-    margin-bottom: 50px;
+    margin-bottom: 5px;
     h2 {
       color: $blue;
       font-family: $quicksand;
       text-align: center;
     }
+  }
+  p {
+    color: $blue;
+    float: right;
+    margin-bottom: 50px;
   }
   .contentEditable {
     @include contentEditable($blue);
@@ -225,5 +230,12 @@ h1 {
   .btn {
     @include button($blue);
     float: right;
+  }
+  img {
+    display: none;
+    position: absolute;
+    top: 165px;
+    right: 25vw;
+    width: 100px;
   }
 }
