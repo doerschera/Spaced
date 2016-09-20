@@ -224,6 +224,8 @@ $(document).ready(function() {
   var back;
   var cardCounter = 0;
   var deckName;
+  var clickedDeck = [];
+  var deckClick = 0;
   var cardIndex = 0;
   var length;
   var cardsToDo = [];
@@ -315,24 +317,51 @@ $(document).ready(function() {
   // select deck
   $(document).on('click', '.deck', function() {
     deckName = $(this).find('h2').html().trim();
+    clickedDeck.push(deckName);
     console.log(deckName);
-
     var contentDiv = $(this).children('div');
     var height = $(this).height();
+    removeDeckInfo();
+    deckInfo();
 
-    contentDiv.addClass('clickedDeck');
-    contentDiv.css('max-height', height*2);
-    contentDiv.animate({height: height*2}, 'slow');
-    contentDiv.css({
-      'height': '174px',
-      'padding': '10px 0px',
-    });
-    contentDiv.empty();
-    contentDiv.append('<h6>cards</h6>');
-    contentDiv.append('<h3>32</h3>');
-    contentDiv.append('<h6>last viewed</h6>');
-    contentDiv.append('<h4>September, 7th <br>2016</h4>');
-    contentDiv.append('<button>start</button');
+    function deckInfo() {
+      var monthDay;
+      var year;
+      var timeRef = firebase.database().ref('users/'+uid+'/'+deckName+'/time');
+
+      timeRef.once('value').then(function(snapshot) {
+        var lastDate = snapshot.child('time').val();
+        console.log(lastDate);
+        monthDay = moment(lastDate).format('MMMM Do');
+        year = moment(lastDate).format('YYYY');
+
+        contentDiv.addClass('clickedDeck');
+        contentDiv.css({
+          'max-height': height*2,
+          'padding': '10px 0px',
+        });
+        contentDiv.animate({height: height*2}, 'slow');
+        contentDiv.empty();
+        contentDiv.append('<h6>cards</h6>');
+        contentDiv.append('<h3>32</h3>');
+        contentDiv.append('<h6>last viewed</h6>');
+        contentDiv.append('<h4>'+monthDay+'<br>'+year+'</h4>');
+        contentDiv.append('<button>start</button');
+      })
+    }
+
+
+    function removeDeckInfo() {
+      $('.clickedDeck').empty();
+      $('.clickedDeck').removeAttr('style');
+      $('.clickedDeck').append('<a href="#"><h2>'+clickedDeck[0]+'</h2></a>');
+      $('.clickedDeck').removeClass('clickedDeck');
+      if(deckClick != 0) {
+        clickedDeck.shift();
+      }
+      deckClick ++;
+    }
+
 
     $('.deck').off('click');
   })
@@ -341,9 +370,9 @@ $(document).ready(function() {
   $('#start').click(function() {
     $('#new').addClass('disable');
     $('#review').removeClass('disable');
-    firebase.database().ref('users/'+uid+'time').update({
-      time: 'null'
-    })
+    // firebase.database().ref('users/'+uid+'/'+deckName'/time').update({
+    //   time: 'null'
+    // })
     console.log(deckName);
     var cardsRef = firebase.database().ref('/users/'+uid+'/'+deckName+'/cards');
     cardsRef.once('value').then(function(snapshot) {
@@ -390,6 +419,7 @@ $(document).ready(function() {
     $('.deckHeading h3').html(deckName);
     console.log(decks);
     firebase.database().ref('/users/'+uid).update(decks);
+    setTime();
   }
 
   function contentEditable(id, keypress) {
@@ -465,7 +495,7 @@ $(document).ready(function() {
 
   function setTime() {
     var newView = moment().format();
-    firebase.database().ref('users/' + uid+'/time').update({time: newView});
+    firebase.database().ref('users/' + uid+'/'+deckName+'/time').update({time: newView});
   }
 
   function getCard() {
