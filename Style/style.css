@@ -222,11 +222,22 @@ h1 {
       margin-right: 10px; }
 
 .empty {
-  margin-top: 250px; }
+  margin-top: 250px;
+  text-align: center; }
   .empty h2 {
     font-family: "Quicksand", sans-serif;
     color: #66ccff;
     text-align: center; }
+  .empty .btn {
+    border: solid 1px #66ccff;
+    border-radius: 0;
+    background-color: #ffffff;
+    color: #66ccff;
+    font-family: "Quicksand", sans-serif;
+    margin-top: 10px;
+    float: none; }
+    .empty .btn:hover {
+      border-width: 2px; }
 
 .cardDisplay {
   margin-top: 60px; }

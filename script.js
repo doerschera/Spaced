@@ -283,7 +283,7 @@ $(document).ready(function() {
 
 
   // dash menu link
-  $('#dashboard').on('click', function() {
+  $(document).on('click', '.dashboard', function() {
     showDash('.newDeck, .cardDisplay');
   });
 
@@ -550,6 +550,11 @@ $(document).ready(function() {
         return false;
       }
     }
+    if(cardNumOf == (cardsLength+1)) {
+      console.log('done');
+      reviewDone();
+      return false;
+    }
 
     cardsRef.child(nextCard).once('value').then(function(snapshot) {
       var cardFront = snapshot.child('front').val();
@@ -559,7 +564,6 @@ $(document).ready(function() {
       $('.reviewContent').append(newHeading);
       $('#cardNumOf').html(cardNumOf+' of '+cardsLength);
       cardNumOf++;
-      console.log(cardsToDo)
     })
   }
 
@@ -580,6 +584,7 @@ $(document).ready(function() {
         if(level < 7) {
 		        level ++
         }
+        console.log(cardsToDo);
         cardsRef.child(nextCard).child('level').set(level)
         console.log(level);
         $('#check').fadeIn('slow').delay(1000).fadeOut('slow', function() {
@@ -686,9 +691,17 @@ $(document).ready(function() {
       }
 
       $('.cardReview').addClass('disable');
-      $('.empty').removeClass('disable');
+      $('.empty').removeClass('disable').empty();
       $('.empty').append('<h2>'+message+'</h2>');
     })
+  }
+
+  function reviewDone() {
+    var message = $('<h2>You have no more cards to review. Nice work!</h2>');
+    var button = $('<button type="button" class="btn dashboard">Back to Dashboard</button>');
+    $('.cardReview').addClass('disable');
+    $('.empty').removeClass('disable').empty();
+    $('.empty').append(message).append(button);
   }
 
 })

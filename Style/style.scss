@@ -192,10 +192,16 @@ h1 {
 
 .empty {
   margin-top: 250px;
+  text-align: center;
   h2 {
     font-family: $quicksand;
     color: $blue;
     text-align: center;
+  }
+  .btn {
+    @include button($blue);
+    margin-top: 10px;
+    float: none;
   }
 }
 
