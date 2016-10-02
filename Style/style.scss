@@ -190,6 +190,15 @@ h1 {
   }
 }
 
+.empty {
+  margin-top: 250px;
+  h2 {
+    font-family: $quicksand;
+    color: $blue;
+    text-align: center;
+  }
+}
+
 .cardDisplay {
   margin-top: 60px;
   div {

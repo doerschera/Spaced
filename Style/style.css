@@ -221,6 +221,13 @@ h1 {
     .newDeck .cardInput #done {
       margin-right: 10px; }
 
+.empty {
+  margin-top: 250px; }
+  .empty h2 {
+    font-family: "Quicksand", sans-serif;
+    color: #66ccff;
+    text-align: center; }
+
 .cardDisplay {
   margin-top: 60px; }
   .cardDisplay div {

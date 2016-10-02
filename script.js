@@ -544,6 +544,11 @@ $(document).ready(function() {
     console.log('next card:'+ nextCard);
     var cardsRef = firebase.database().ref('users/'+uid+'/'+deckName+'/cards');
 
+    if(!nextCard) {
+      reviewEmpty()
+      return false;
+    }
+
     cardsRef.child(nextCard).once('value').then(function(snapshot) {
       var cardFront = snapshot.child('front').val();
       console.log(cardFront);
@@ -645,6 +650,37 @@ $(document).ready(function() {
         cardRandom();
         getCard();
       })
+    })
+  }
+
+  function reviewEmpty() {
+    var message;
+    var levels = [];
+    var cardRef = firebase.database().ref('/users/'+uid+'/'+deckName+'/cards');
+
+    cardRef.once('value').then(function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        var card = childSnapshot.val();
+        var level = card.level;
+        console.log(level);
+        levels.push(level);
+      })
+      levels.sort()
+      var lowestLevel = levels[0];
+      if(lowestLevel == 2) {
+        message = 'You have no cards to review. Check back later today!';
+      } else if(lowestLevel == 3) {
+        message = 'You have no cards to review. Check back tomorrow!';
+      } else if(lowestLevel == 5) {
+        message = 'You have no cards to review. Check back next week!';
+      } else if(lowestLevel == 6) {
+        message = 'You have no cards to review. Your next review is in one month!';
+      } else if(lowestLevel) {
+        message = 'You have no cards to view. Your next review is in three months!';
+      }
+
+      $('.cardReview').addClass('disable');
+      $('.empty').append('<h2>'+message+'</h2>');
     })
   }
 
