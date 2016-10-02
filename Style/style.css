@@ -237,11 +237,15 @@ h1 {
   border: solid 1px #66ccff;
   padding: 50px;
   margin-top: 150px;
-  margin-bottom: 5px; }
+  margin-bottom: 5px;
+  text-align: center; }
   .cardReview .reviewContent h2 {
     color: #66ccff;
     font-family: "Quicksand", sans-serif;
     text-align: center; }
+  .cardReview .reviewContent .btn {
+    margin-top: 10px;
+    float: none; }
 .cardReview p {
   color: #66ccff;
   float: right;

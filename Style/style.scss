@@ -212,10 +212,15 @@ h1 {
     padding: 50px;
     margin-top: 150px;
     margin-bottom: 5px;
+    text-align: center;
     h2 {
       color: $blue;
       font-family: $quicksand;
       text-align: center;
+    }
+    .btn {
+      margin-top: 10px;
+      float: none;
     }
   }
   p {

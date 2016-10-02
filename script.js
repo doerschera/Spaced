@@ -396,7 +396,15 @@ $(document).ready(function() {
   })
 
   // next card
-  $('#next').on('click', getNextCard);
+  $(document).on('click', '#next', function() {
+    console.log('next');
+    $('.reviewContent').empty();
+    $('#answer').html('Your Answer');
+    $('#answer').removeAttr('style');
+    $('#submit').removeClass('disable');
+    keypressA = true;
+    getCard();
+  });
 
   // logo and menu match page color
   function changeColor(color) {
