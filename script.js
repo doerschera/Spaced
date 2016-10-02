@@ -234,6 +234,7 @@ $(document).ready(function() {
   var cardIndex = 0;
   var length;
   var cardsToDo = [];
+  var cardsLength = 0;
   var cardOrder = [];
   var nextCard = cardOrder[cardIndex];
   var level = 1;
@@ -518,11 +519,11 @@ $(document).ready(function() {
   }
 
   function cardRandom() {
-    var cardsLength = cardsToDo.length;
+    cardsLength = cardsToDo.length;
     console.log(cardsLength);
     for(var i = 0; i < cardsLength; i++) {
       var num = Math.floor(Math.random()*cardsLength);
-      if(cardOrder.length == cardsToDo.length) {
+      if(cardOrder.length == cardsLength) {
         return false;
       } else if(cardOrder.indexOf(num) == -1) {
         console.log('here');
@@ -543,10 +544,11 @@ $(document).ready(function() {
     var nextCard = cardOrder[cardIndex];
     console.log('next card:'+ nextCard);
     var cardsRef = firebase.database().ref('users/'+uid+'/'+deckName+'/cards');
-
-    if(!nextCard) {
-      reviewEmpty()
-      return false;
+    if(cardsToDo.length < 1) {
+      if(!nextCard) {
+        reviewEmpty()
+        return false;
+      }
     }
 
     cardsRef.child(nextCard).once('value').then(function(snapshot) {
@@ -555,8 +557,9 @@ $(document).ready(function() {
       var newHeading = $('<h2>');
       newHeading = newHeading.html(cardFront);
       $('.reviewContent').append(newHeading);
-      $('#cardNumOf').html(cardNumOf+' of '+length);
+      $('#cardNumOf').html(cardNumOf+' of '+cardsLength);
       cardNumOf++;
+      console.log(cardsToDo)
     })
   }
 
@@ -608,16 +611,19 @@ $(document).ready(function() {
   function determineLevels() {
     length = parseInt(length);
     var cardRef = firebase.database().ref('/users/'+uid+'/'+deckName+'/cards');
-    var timeRef = firebase.database().ref('/users/'+uid+'/time');
+    var timeRef = firebase.database().ref('/users/'+uid+'/'+deckName+'/time');
 
     timeRef.once('value').then(function(snapshot) {
-      var lastView = snapshot.child('time').val();
-      console.log(lastView);
+      var time = snapshot.val();
+      var lastView = time.time;
       var now = moment();
       var diff = now.diff(lastView, 'hours');
       console.log('diff' +diff);
 
-      if(diff <= 3) {
+      if(diff == 0) {
+        level = 1;
+        console.log('level: '+level);
+      } else if(diff <= 3) {
         level = 2;
         console.log('level: '+level);
       } else if (diff <= 24) {
@@ -680,6 +686,7 @@ $(document).ready(function() {
       }
 
       $('.cardReview').addClass('disable');
+      $('.empty').removeClass('disable');
       $('.empty').append('<h2>'+message+'</h2>');
     })
   }
