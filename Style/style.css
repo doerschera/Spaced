@@ -93,8 +93,7 @@ h1 {
     #mainHeader .btn:hover {
       border-width: 2px; }
     #mainHeader .btn:hover {
-      -webkit-text-stroke-width: 1px;
-      -webkit-text-stroke-color: #008080; }
+      -webkit-text-stroke-width: 1px; }
 
 .userDash {
   margin-top: 150px; }
@@ -286,8 +285,6 @@ h1 {
   float: right; }
   .cardReview .btn:hover {
     border-width: 2px; }
-.cardReview #next {
-  margin-right: 10px; }
 .cardReview img {
   display: none;
   position: absolute;
