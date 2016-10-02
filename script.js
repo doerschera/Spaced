@@ -317,6 +317,7 @@ $(document).ready(function() {
     $('.newDeck, .cardDisplay').addClass('disable');
     $('.userDash').removeClass('disable');
     changeColor(teal);
+    populateDash();
   })
 
   // select deck
@@ -407,6 +408,7 @@ $(document).ready(function() {
 
   function populateDash() {
     var ref = firebase.database().ref('/users/'+uid);
+    $('.deck').remove();
     ref.once('value').then(function(snapshot) {
       var decksNum = snapshot.numChildren();
       snapshot.forEach(function(snapshotChild) {
