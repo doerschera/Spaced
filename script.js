@@ -396,15 +396,7 @@ $(document).ready(function() {
   })
 
   // next card
-  $('#next').click(function() {
-    $('.reviewContent').empty();
-    $('#answer').html('Your Answer');
-    $('#answer').removeAttr('style');
-    $('#submit').removeClass('disable');
-    $('#next').addClass('disable');
-    keypressA = true;
-    getCard();
-  })
+  $('#next').on('click', getNextCard);
 
   // logo and menu match page color
   function changeColor(color) {
@@ -563,6 +555,7 @@ $(document).ready(function() {
     cardsRef.child(nextCard).once('value').then(function(snapshot) {
       var correct = snapshot.child('back').val();
       var level = snapshot.child('level').val();
+      var nextButton = $('<button type="button" class="btn" id="next">next</button>');
       if(answer == correct) {
         console.log('correct');
         if(level < 7) {
@@ -570,17 +563,30 @@ $(document).ready(function() {
         }
         cardsRef.child(nextCard).child('level').set(level)
         console.log(level);
-        $('#o').fadeIn('slow').delay(500).fadeOut('slow');
+        $('#check').fadeIn('slow').delay(1000).fadeOut('slow', function() {
+          $('.reviewContent > h2').html('You\'re correct!');
+          $('.reviewContent').append(nextButton)
+        });
       } else {
         console.log('incorrect');
         cardsRef.child(nextCard).child('level').set(1);
-        $('#x').fadeIn('slow').delay(500).fadeOut('slow', function() {
+        $('#x').fadeIn('slow').delay(1000).fadeOut('slow', function() {
           $('.reviewContent > h2').html('The correct answer is: '+correct);
+          $('.reviewContent').append(nextButton);
         })
       }
       $('#submit').addClass('disable');
-      $('#next').removeClass('disable');
     })
+  }
+
+  function getNextCard() {
+    $('.reviewContent').empty();
+    $('#answer').html('Your Answer');
+    $('#answer').removeAttr('style');
+    $('#submit').removeClass('disable');
+    $('#next').addClass('disable');
+    keypressA = true;
+    getCard();
   }
 
   function determineLevels() {

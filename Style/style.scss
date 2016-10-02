@@ -230,11 +230,14 @@ h1 {
     @include button($blue);
     float: right;
   }
-  img {
+  #check, #x {
     display: none;
     position: absolute;
-    top: 165px;
-    right: 25vw;
-    width: 100px;
+    top: 180px;
+    right: 20vw;
+    font-size: 100px;
+    color: white;
+    -webkit-text-stroke: 2px;
+    -webkit-text-stroke-color: $blue;
   }
 }

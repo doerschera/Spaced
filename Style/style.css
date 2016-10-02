@@ -285,11 +285,14 @@ h1 {
   float: right; }
   .cardReview .btn:hover {
     border-width: 2px; }
-.cardReview img {
+.cardReview #check, .cardReview #x {
   display: none;
   position: absolute;
-  top: 165px;
-  right: 25vw;
-  width: 100px; }
+  top: 180px;
+  right: 20vw;
+  font-size: 100px;
+  color: white;
+  -webkit-text-stroke: 2px;
+  -webkit-text-stroke-color: #66ccff; }
 
 /*# sourceMappingURL=style.css.map */
