@@ -227,6 +227,7 @@ $(document).ready(function() {
   var front;
   var back;
   var cardCounter = 0;
+  var cardNumOf = 1;
   var deckName;
   var clickedDeck = [];
   var deckClick = 0;
@@ -383,6 +384,7 @@ $(document).ready(function() {
 
   // select card
   $(document).on('click', '#start', function() {
+    cardNumOf = 1;
     changeColor(blue);
     $('.userDash, #landingHead').addClass('disable');
     $('.cardReview').removeClass('disable');
@@ -548,7 +550,8 @@ $(document).ready(function() {
       var newHeading = $('<h2>');
       newHeading = newHeading.html(cardFront);
       $('.reviewContent').append(newHeading);
-      $('#cardNumOf').html((cardCounter+1)+' of '+length);
+      $('#cardNumOf').html(cardNumOf+' of '+length);
+      cardNumOf++;
     })
   }
 
