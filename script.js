@@ -275,10 +275,14 @@ $(document).ready(function() {
     $(window).unbind('scroll');
   })
 
+  // dash menu link
+  $('#dashboard').on('click', function() {
+    showDash('.newDeck, .cardDisplay');
+  });
+
   // create new deck
   $('#newDeck').click(function() {
-    $('.userDash').addClass('disable');
-    $('.newDeck').removeClass('disable');
+    hideDash('.newDeck');
     changeColor(red);
   })
 
@@ -314,8 +318,7 @@ $(document).ready(function() {
 
   // done adding cards to new deck
   $('#done').click(function() {
-    $('.newDeck, .cardDisplay').addClass('disable');
-    $('.userDash').removeClass('disable');
+    showDash('.newDeck, .cardDisplay');
     changeColor(teal);
     populateDash();
   })
@@ -398,12 +401,24 @@ $(document).ready(function() {
     getCard();
   })
 
+  // logo and menu match page color
   function changeColor(color) {
     $('#mainHeader h1').css('color', color);
     $('#mainHeader .btn').css({
       'color': color,
       'border-color': color
     });
+  }
+
+  // hide dash, show new deck
+  function hideDash(page) {
+    $('.userDash').addClass('disable');
+    $(page).removeClass('disable');
+  }
+
+  function showDash(page) {
+    $('.userDash').removeClass('disable');
+    $(page).addClass('disable');
   }
 
   function populateDash() {
