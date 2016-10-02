@@ -58,6 +58,7 @@ $(document).ready(function() {
     if (firebase.auth().currentUser) {
       // [START signout]
       firebase.auth().signOut();
+      signOutShow();
       // [END signout]
     } else {
       var email = document.getElementById('email').value;
@@ -206,7 +207,10 @@ $(document).ready(function() {
     });
     // [END authstatelistener]
     // document.getElementsByClassName('quickstart-sign-in')[0].addEventListener('click', toggleSignIn, false);
-    $('.quickstart-sign-in').on('click', toggleSignIn);
+    $('.quickstart-sign-in').on('click', function() {
+      toggleSignIn();
+      signOut();
+    });
     document.getElementById('quickstart-sign-up').addEventListener('click', handleSignUp, false);
     // document.getElementById('quickstart-verify-email').addEventListener('click', sendEmailVerification, false);
     // document.getElementById('quickstart-password-reset').addEventListener('click', sendPasswordReset, false);
@@ -274,6 +278,7 @@ $(document).ready(function() {
     $('#landingHead').fadeIn(1000*1.5);
     $(window).unbind('scroll');
   })
+
 
   // dash menu link
   $('#dashboard').on('click', function() {
@@ -408,6 +413,13 @@ $(document).ready(function() {
       'color': color,
       'border-color': color
     });
+  }
+
+  // sign out
+  function signOutShow() {
+    $('.main').addClass('disable');
+    $('#landingHead, .welcome, .authBox').removeClass('disable');
+    $('.authBox').css('top', '200px');
   }
 
   // hide dash, show new deck
