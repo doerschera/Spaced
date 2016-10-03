@@ -255,7 +255,7 @@ $(document).ready(function() {
       name = ref.name;
 
       $('.welcome').css({height: '0', width: '0', margin: 0});
-      $('.main').removeClass('disable');
+      $('.main, footer').removeClass('disable');
       $('.authBox, #landingHead').addClass('disable');
       $('#landingHead').css('display', 'none');
       populateDash();
@@ -388,7 +388,7 @@ $(document).ready(function() {
   $(document).on('click', '#start', function() {
     cardNumOf = 1;
     changeColor(blue);
-    $('.userDash, #landingHead').addClass('disable');
+    $('.userDash, #landingHead, footer').addClass('disable');
     $('.cardReview').removeClass('disable');
       setTime();
       determineLevels();
@@ -417,12 +417,13 @@ $(document).ready(function() {
       'color': color,
       'border-color': color
     });
+    $('footer p').css('color', color);
   }
 
   // sign out
   function signOutShow() {
-    $('.main').addClass('disable');
-    $('#landingHead, .welcome, .authBox').removeClass('disable');
+    $('.main, footer').addClass('disable');
+    $('#landingHead, .welcome, .authBox,').removeClass('disable');
     $('.authBox').css('top', '200px');
   }
 
@@ -444,7 +445,7 @@ $(document).ready(function() {
       var decksNum = snapshot.numChildren();
       snapshot.forEach(function(snapshotChild) {
         var deckTitle = snapshotChild.key;
-        var wrapperDiv = $('<div class="deck col-xs-6 col-sm-4"></div>')
+        var wrapperDiv = $('<div class="deck col-xs-6 col-sm-4 col-lg-3"></div>')
         var newDeckDiv = $('<div><a href="#"><h2>'+deckTitle+'</h2></a></div>');
         var wrappedDeck = $(wrapperDiv).append(newDeckDiv);
         $('.userDecks').prepend(wrappedDeck);

@@ -317,4 +317,16 @@ h1 {
   -webkit-text-stroke: 2px;
   -webkit-text-stroke-color: #66ccff; }
 
+footer {
+  position: absolute;
+  top: 100%;
+  width: 100%; }
+  footer p {
+    margin-top: 100px;
+    padding-right: 10px;
+    float: right;
+    font-size: 12px;
+    text-align: right;
+    color: #008080; }
+
 /*# sourceMappingURL=style.css.map */
