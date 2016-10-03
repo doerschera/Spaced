@@ -290,6 +290,7 @@ $(document).ready(function() {
 
   // create new deck
   $('#newDeck').click(function() {
+    newDeckReset();
     hideDash('.newDeck');
     changeColor(red);
   })
@@ -490,6 +491,15 @@ $(document).ready(function() {
     $('#back').html('Card Back');
     $('#front, #back').css('color', '#8c8c8c');
     $('.cardInput > p').html('Card_'+(cardCounter+1));
+  }
+
+  function newDeckReset() {
+    $('.cardDisplay').empty();
+    $('.addName').removeClass('disable');
+    $('#deckName').val('');
+    $('.cardInput').addClass('disable');
+    $('.cardInput:first').children('h3').remove();
+    cardCounter = 0;
   }
 
   function displayNewCard() {
