@@ -209,7 +209,6 @@ $(document).ready(function() {
     // document.getElementsByClassName('quickstart-sign-in')[0].addEventListener('click', toggleSignIn, false);
     $('.quickstart-sign-in').on('click', function() {
       toggleSignIn();
-      signOut();
     });
     document.getElementById('quickstart-sign-up').addEventListener('click', handleSignUp, false);
     // document.getElementById('quickstart-verify-email').addEventListener('click', sendEmailVerification, false);
@@ -549,8 +548,7 @@ $(document).ready(function() {
         reviewEmpty()
         return false;
       }
-    }
-    if(cardNumOf == (cardsLength+1)) {
+    } else if(cardNumOf == (cardsLength+1)) {
       console.log('done');
       reviewDone();
       return false;
@@ -585,8 +583,9 @@ $(document).ready(function() {
 		        level ++
         }
         console.log(cardsToDo);
-        cardsRef.child(nextCard).child('level').set(level)
+        cardsRef.child(nextCard).child('level').set(level);
         console.log(level);
+        cardOrder.push(nextCard);
         $('#check').fadeIn('slow').delay(1000).fadeOut('slow', function() {
           $('.reviewContent > h2').html('You\'re correct!');
           $('.reviewContent').append(nextButton)
@@ -597,6 +596,7 @@ $(document).ready(function() {
         $('#x').fadeIn('slow').delay(1000).fadeOut('slow', function() {
           $('.reviewContent > h2').html('The correct answer is: '+correct);
           $('.reviewContent').append(nextButton);
+          cardsLength++;
         })
       }
       $('#submit').addClass('disable');
