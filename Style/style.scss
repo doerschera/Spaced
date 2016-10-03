@@ -8,6 +8,8 @@ body {
     family: $source-sans;
     weight: 300;
   }
+  height: 100%;
+  margin-bottom: 200px;
 }
 
 .disable {
@@ -263,11 +265,10 @@ h1 {
 }
 
 footer {
-  position: absolute;
-  top: 100%;
+  position: fixed;
+  bottom: 0%;
   width: 100%;
   p {
-    margin-top: 100px;
     padding-right: 10px;
     float: right;
     font-size: 12px;

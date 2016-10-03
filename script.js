@@ -518,6 +518,7 @@ $(document).ready(function() {
     $('.cardDisplay').append(backDiv);
 
     var divWidth = $('.cardDisplay > div').width();
+    divWidth = divWidth*0.70;
     $('.cardDisplay > div').css('height', divWidth+'px');
   }
 

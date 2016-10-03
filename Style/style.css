@@ -1,7 +1,9 @@
 @import "https://fonts.googleapis.com/css?family=Quicksand|Source+Sans+Pro:300,400";
 body {
   font-family: "Source Sans Pro", sans-serif;
-  font-weight: 300; }
+  font-weight: 300;
+  height: 100%;
+  margin-bottom: 200px; }
 
 .disable {
   display: none; }
@@ -239,6 +241,10 @@ h1 {
     .empty .btn:hover {
       border-width: 2px; }
 
+.new-card-heading h3 {
+  color: #990000;
+  font-family: "Quicksand", sans-serif; }
+
 .cardDisplay {
   margin-top: 60px; }
   .cardDisplay div {
@@ -318,11 +324,10 @@ h1 {
   -webkit-text-stroke-color: #66ccff; }
 
 footer {
-  position: absolute;
-  top: 100%;
+  position: fixed;
+  bottom: 0%;
   width: 100%; }
   footer p {
-    margin-top: 100px;
     padding-right: 10px;
     float: right;
     font-size: 12px;
