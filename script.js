@@ -642,25 +642,25 @@ $(document).ready(function() {
       var diff = now.diff(lastView, 'hours');
       console.log('diff' +diff);
 
-      if(diff == 0) {
+      if(diff <= 3) {
         level = 1;
         console.log('level: '+level);
-      } else if(diff <= 3) {
+      } else if(diff >= 3 & diff<24) {
         level = 2;
         console.log('level: '+level);
-      } else if (diff <= 24) {
+      } else if (diff >= 24 & diff<36) {
         level = 3;
         console.log('level: '+level);
-      } else if(diff <= 36) {
+      } else if(diff >= 36 & diff <168) {
         level = 4;
         console.log('level: '+level);
-      } else if(diff <= 168) {
+      } else if(diff >= 168 & diff <720) {
         level = 5;
         console.log('level: '+level);
-      } else if(diff <= 720) {
+      } else if(diff >= 720 & diff <2160) {
         level = 6;
         console.log('level: '+level);
-      } else if (diff <= 2160) {
+      } else if (diff >= 2160) {
         level = 7;
         console.log('level: '+level);
       }

@@ -69,6 +69,8 @@
     color: #8c8c8c;
     position: absolute;
     bottom: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
     &:focus{
       outline: 0px solid transparent;
     }

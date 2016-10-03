@@ -217,7 +217,9 @@ h1 {
         margin-bottom: 3px;
         color: #8c8c8c;
         position: absolute;
-        bottom: 0; }
+        bottom: 0;
+        overflow-x: hidden;
+        overflow-y: auto; }
         .newDeck .cardInput .contentEditable p:focus {
           outline: 0px solid transparent; }
     .newDeck .cardInput #done {
@@ -240,10 +242,6 @@ h1 {
     float: none; }
     .empty .btn:hover {
       border-width: 2px; }
-
-.new-card-heading h3 {
-  color: #990000;
-  font-family: "Quicksand", sans-serif; }
 
 .cardDisplay {
   margin-top: 60px; }
@@ -301,7 +299,9 @@ h1 {
     margin-bottom: 3px;
     color: #8c8c8c;
     position: absolute;
-    bottom: 0; }
+    bottom: 0;
+    overflow-x: hidden;
+    overflow-y: auto; }
     .cardReview .contentEditable p:focus {
       outline: 0px solid transparent; }
 .cardReview .btn {
