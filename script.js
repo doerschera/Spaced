@@ -284,6 +284,7 @@ $(document).ready(function() {
   // dash menu link
   $(document).on('click', '.dashboard', function() {
     showDash('.newDeck, .cardDisplay, .cardReview, .empty');
+    removeDeckInfo();
     changeColor(teal);
   });
 
@@ -367,21 +368,20 @@ $(document).ready(function() {
       })
     }
 
-
-    function removeDeckInfo() {
-      $('.clickedDeck').empty();
-      $('.clickedDeck').removeAttr('style');
-      $('.clickedDeck').append('<a href="#"><h2>'+clickedDeck[0]+'</h2></a>');
-      $('.clickedDeck').removeClass('clickedDeck');
-      if(deckClick != 0) {
-        clickedDeck.shift();
-      }
-      deckClick ++;
-    }
-
-
     $('.deck').off('click');
   })
+
+  function removeDeckInfo() {
+    $('.clickedDeck').empty();
+    $('.clickedDeck').removeAttr('style');
+    $('.clickedDeck').append('<a href="#"><h2>'+clickedDeck[0]+'</h2></a>');
+    $('.clickedDeck').removeClass('clickedDeck');
+    if(deckClick != 0) {
+      clickedDeck.shift();
+    }
+    deckClick ++;
+    $('.deck').off('click');
+  }
 
   // select card
   $(document).on('click', '#start', function() {
