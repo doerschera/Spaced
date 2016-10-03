@@ -283,7 +283,8 @@ $(document).ready(function() {
 
   // dash menu link
   $(document).on('click', '.dashboard', function() {
-    showDash('.newDeck, .cardDisplay');
+    showDash('.newDeck, .cardDisplay, .cardReview, .empty');
+    changeColor(teal);
   });
 
   // create new deck
@@ -518,6 +519,7 @@ $(document).ready(function() {
   }
 
   function cardRandom() {
+    cardOrder = [];
     cardsLength = cardsToDo.length;
     console.log(cardsLength);
     for(var i = 0; i < cardsLength; i++) {
@@ -592,6 +594,9 @@ $(document).ready(function() {
         });
       } else {
         console.log('incorrect');
+        console.log(nextCard);
+        cardOrder.push(nextCard);
+        console.log(cardOrder);
         cardsRef.child(nextCard).child('level').set(1);
         $('#x').fadeIn('slow').delay(1000).fadeOut('slow', function() {
           $('.reviewContent > h2').html('The correct answer is: '+correct);
@@ -665,6 +670,7 @@ $(document).ready(function() {
   }
 
   function reviewEmpty() {
+    var button = $('<button type="button" class="btn dashboard">Back to Dashboard</button>');
     var message;
     var levels = [];
     var cardRef = firebase.database().ref('/users/'+uid+'/'+deckName+'/cards');
@@ -692,7 +698,7 @@ $(document).ready(function() {
 
       $('.cardReview').addClass('disable');
       $('.empty').removeClass('disable').empty();
-      $('.empty').append('<h2>'+message+'</h2>');
+      $('.empty').append('<h2>'+message+'</h2>').append(button);
     })
   }
 
