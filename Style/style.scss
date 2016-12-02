@@ -63,7 +63,8 @@ h1 {
   @include solid-border($purple);
   position: absolute;
   padding: 20px 50px;
-
+  height: 0;
+  width: 0;
   .p {
     font-family: $source-sans;
   }

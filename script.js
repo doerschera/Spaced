@@ -52,7 +52,7 @@ $(document).ready(function() {
   // Initialize the FirebaseUI Widget using Firebase.
   var ui = new firebaseui.auth.AuthUI(firebase.auth());
   // The start method will wait until the DOM is loaded.
-  ui.start('#firebaseAuth', uiConfig);
+  // ui.start('#firebaseAuth', uiConfig);
 
   function toggleSignIn() {
     if (firebase.auth().currentUser) {
@@ -275,7 +275,10 @@ $(document).ready(function() {
     $(document).scrollTop(0);
     $('.welcome').animate({top: '-1000px', opacity: '0'}, 1000*1.5)
       .addClass('disable');
-    $('.authBox').removeClass('disable').animate({top: '30vh'}, 1000*2);
+    $('.authBox').css({
+      height: 'auto',
+      width: '65vw'
+    }).animate({top: '30vh'}, 1000*2);
     $('#landingHead').fadeIn(1000*1.5);
     $(window).unbind('scroll');
   })

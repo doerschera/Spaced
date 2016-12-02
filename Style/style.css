@@ -42,7 +42,9 @@ h1 {
 .authBox {
   border: solid 1px #660066;
   position: absolute;
-  padding: 20px 50px; }
+  padding: 20px 50px;
+  height: 0;
+  width: 0; }
   .authBox .p {
     font-family: "Source Sans Pro", sans-serif; }
   .authBox .form-control {
